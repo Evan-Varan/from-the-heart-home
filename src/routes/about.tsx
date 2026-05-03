@@ -2,7 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, Eyebrow } from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import { Heart, Sparkles, Users } from "lucide-react";
-import tutorImg from "@/assets/tutor-session.jpg";
+import { RotatingImage } from "@/components/RotatingImage";
+import tutor1 from "@/assets/tutor-1.jpg";
+import tutor2 from "@/assets/tutor-2.jpg";
+import tutor3 from "@/assets/tutor-3.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -47,13 +50,10 @@ function AboutPage() {
           </div>
           <div className="relative">
             <div className="absolute -inset-4 rounded-[2rem] bg-blush/40 blur-2xl" aria-hidden />
-            <img
-              src={tutorImg}
+            <RotatingImage
+              images={[tutor1, tutor2, tutor3]}
               alt="A tutor smiling during a virtual session"
-              loading="lazy"
-              width={1024}
-              height={1024}
-              className="relative rounded-3xl object-cover shadow-xl"
+              className="relative aspect-square w-full rounded-3xl shadow-xl"
             />
           </div>
         </div>
