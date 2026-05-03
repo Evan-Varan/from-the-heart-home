@@ -27,7 +27,7 @@ export function Logo({ className = "" }: { className?: string }) {
             {/* book spine shadow */}
             <path
               d="M0 -6 L0 7"
-              stroke="hsl(var(--card))"
+              stroke="#FFFBF5"
               strokeWidth="1.2"
               strokeLinecap="round"
               opacity="0.55"
@@ -39,7 +39,7 @@ export function Logo({ className = "" }: { className?: string }) {
                  L 0 7
                  C -3 6, -7 6, -10 7
                  Z"
-              fill="hsl(var(--card))"
+              fill="#FFFBF5"
             />
             {/* right page */}
             <path
@@ -48,7 +48,7 @@ export function Logo({ className = "" }: { className?: string }) {
                  L 0 7
                  C 3 6, 7 6, 10 7
                  Z"
-              fill="hsl(var(--card))"
+              fill="#FFFBF5"
             />
             {/* page lines */}
             <path
