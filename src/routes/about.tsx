@@ -56,7 +56,6 @@ function AboutPage() {
               alt="A tutor smiling during a virtual session"
               className="relative aspect-square w-full rounded-3xl shadow-xl"
             />
-            <img src={logoMark} alt="" aria-hidden className="pointer-events-none absolute -left-6 -top-6 h-20 w-20 -rotate-6 drop-shadow-md md:h-24 md:w-24" />
           </div>
         </div>
       </Section>

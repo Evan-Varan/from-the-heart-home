@@ -294,7 +294,8 @@ function Home() {
 
       {/* TESTIMONIALS */}
       <Section className="bg-secondary/40">
-        <div className="text-center">
+        <div className="relative text-center">
+          <img src={logoMark} alt="" aria-hidden className="pointer-events-none mx-auto mb-4 h-12 w-12 opacity-90" />
           <Eyebrow>Parent stories</Eyebrow>
           <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Loved by families nationwide.</h2>
         </div>
@@ -332,12 +333,6 @@ function Home() {
         <div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-primary to-warm px-6 py-14 text-primary-foreground shadow-xl md:px-14 md:py-20">
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden />
           <div className="absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden />
-          <img
-            src={logoMark}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute -right-6 bottom-6 h-40 w-40 opacity-20 md:h-56 md:w-56"
-          />
           <div className="relative grid items-center gap-8 md:grid-cols-3">
             <div className="md:col-span-2">
               <h2 className="text-3xl font-semibold leading-tight md:text-5xl">
