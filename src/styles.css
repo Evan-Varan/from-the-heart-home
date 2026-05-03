@@ -66,6 +66,7 @@
   --color-warm: var(--warm);
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-script: 'Caveat', 'Fraunces', cursive;
 }
 
 :root {
