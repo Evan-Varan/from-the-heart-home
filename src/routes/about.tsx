@@ -6,6 +6,7 @@ import { RotatingImage } from "@/components/RotatingImage";
 import tutor1 from "@/assets/tutor-1.jpg";
 import tutor2 from "@/assets/tutor-2.jpg";
 import tutor3 from "@/assets/tutor-3.jpg";
+import logoMark from "@/assets/logo-mark.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -55,6 +56,7 @@ function AboutPage() {
               alt="A tutor smiling during a virtual session"
               className="relative aspect-square w-full rounded-3xl shadow-xl"
             />
+            <img src={logoMark} alt="" aria-hidden className="pointer-events-none absolute -left-6 -top-6 h-20 w-20 -rotate-6 drop-shadow-md md:h-24 md:w-24" />
           </div>
         </div>
       </Section>

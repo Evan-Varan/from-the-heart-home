@@ -21,6 +21,7 @@ import hero3 from "@/assets/hero-3.jpg";
 import parent1 from "@/assets/parent-1.jpg";
 import parent2 from "@/assets/parent-2.jpg";
 import parent3 from "@/assets/parent-3.jpg";
+import logoMark from "@/assets/logo-mark.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -103,6 +104,12 @@ function Home() {
               </div>
               <p className="text-xs text-muted-foreground">from 200+ parent reviews</p>
             </div>
+            <img
+              src={logoMark}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute -bottom-6 -right-6 hidden h-24 w-24 rotate-6 opacity-90 drop-shadow-lg md:block"
+            />
           </div>
         </div>
       </section>
@@ -211,7 +218,8 @@ function Home() {
 
       {/* HOW IT WORKS */}
       <Section className="bg-secondary/40">
-        <div className="text-center">
+        <div className="relative text-center">
+          <img src={logoMark} alt="" aria-hidden className="pointer-events-none mx-auto mb-4 h-12 w-12 opacity-90" />
           <Eyebrow>How it works</Eyebrow>
           <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Three simple steps.</h2>
         </div>
@@ -262,7 +270,7 @@ function Home() {
               <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-blush/60 blur-3xl" aria-hidden />
               <div className="relative">
                 <div className="flex items-center gap-2 text-primary">
-                  <Heart className="h-4 w-4" />
+                  <img src={logoMark} alt="" aria-hidden className="h-5 w-5" />
                   <span className="text-xs font-medium uppercase tracking-widest">Per Session</span>
                 </div>
                 <div className="mt-3 flex items-baseline gap-2">
@@ -324,6 +332,12 @@ function Home() {
         <div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-primary to-warm px-6 py-14 text-primary-foreground shadow-xl md:px-14 md:py-20">
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden />
           <div className="absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden />
+          <img
+            src={logoMark}
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute -right-6 bottom-6 h-40 w-40 opacity-20 md:h-56 md:w-56"
+          />
           <div className="relative grid items-center gap-8 md:grid-cols-3">
             <div className="md:col-span-2">
               <h2 className="text-3xl font-semibold leading-tight md:text-5xl">
