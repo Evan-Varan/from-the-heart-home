@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { EnvelopeSimple as Mail, MapPin, Phone } from "@/components/icons";
 
 export function SiteFooter() {
   return (

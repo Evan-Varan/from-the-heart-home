@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, CalendarHeart, Lock, ArrowRight } from "lucide-react";
+import { ArrowRight, CalendarHeart, EnvelopeSimple as Mail, Lock, Phone } from "@/components/icons";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { FormEvent, useState } from "react";

@@ -1,7 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, Eyebrow } from "@/components/Section";
 import { Button } from "@/components/ui/button";
-import { Calculator, FlaskConical, BookOpen, GraduationCap, ClipboardCheck, Brain, Languages, PencilRuler } from "lucide-react";
+import {
+  BookOpen,
+  Brain,
+  Calculator,
+  ClipboardCheck,
+  Flask as FlaskConical,
+  GraduationCap,
+  PencilRuler,
+  Languages,
+} from "@/components/icons";
 
 export const Route = createFileRoute("/services")({
   head: () => ({

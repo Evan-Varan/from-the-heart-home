@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/Logo";
-import { CalendarHeart, Sparkles } from "lucide-react";
+import { CalendarHeart, Progress } from "@/components/icons";
 
 export const Route = createFileRoute("/portal")({
   head: () => ({
@@ -38,7 +38,7 @@ function PortalPage() {
               <span className="text-sm">Schedule weekly sessions</span>
             </div>
             <div className="flex items-center gap-3 rounded-2xl border border-border bg-card/70 p-4 backdrop-blur">
-              <Sparkles className="h-5 w-5 text-primary" />
+              <Progress className="h-5 w-5 text-primary" />
               <span className="text-sm">View tutor notes & progress</span>
             </div>
           </div>

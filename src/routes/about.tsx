@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, Eyebrow } from "@/components/Section";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Users } from "lucide-react";
+import { Heart, Progress, Users } from "@/components/icons";
 import { RotatingImage } from "@/components/RotatingImage";
 import tutor1 from "@/assets/tutor-1.jpg";
 import tutor2 from "@/assets/tutor-2.jpg";
@@ -65,7 +65,7 @@ function AboutPage() {
           {[
             { icon: Heart, title: "Personal, not corporate", body: "You&rsquo;ll know your tutor by name. We answer your texts, remember your kid&rsquo;s big test, and show up like family." },
             { icon: Users, title: "One student, one tutor", body: "Consistency builds trust. Your student keeps the same tutor week after week — no shuffling." },
-            { icon: Sparkles, title: "Confidence first", body: "Grades follow when students feel capable. We teach the material and the mindset." },
+            { icon: Progress, title: "Confidence first", body: "Grades follow when students feel capable. We teach the material and the mindset." },
           ].map((c) => (
             <div key={c.title} className="rounded-2xl border border-border bg-card p-7 shadow-sm">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">

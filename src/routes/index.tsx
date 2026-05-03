@@ -3,7 +3,7 @@ import { Section, Eyebrow } from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import {
   Heart,
-  Sparkles,
+  Progress,
   Users,
   ShieldCheck,
   CalendarHeart,
@@ -13,7 +13,7 @@ import {
   ArrowRight,
   Check,
   MapPin,
-} from "lucide-react";
+} from "@/components/icons";
 import { RotatingImage } from "@/components/RotatingImage";
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
@@ -132,7 +132,7 @@ function Home() {
           {[
             { icon: Heart, title: "Personal attention", body: "One tutor. One student. A real relationship that grows session after session." },
             { icon: ShieldCheck, title: "Trusted by parents", body: "Background-checked tutors, transparent communication, and parent updates included." },
-            { icon: Sparkles, title: "Confidence + grades", body: "We don&rsquo;t just teach the material — we help students believe they can do it." },
+            { icon: Progress, title: "Confidence + grades", body: "We don&rsquo;t just teach the material — we help students believe they can do it." },
           ].map((c) => (
             <div key={c.title} className="rounded-2xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
