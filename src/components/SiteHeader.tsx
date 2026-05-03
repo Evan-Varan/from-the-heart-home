@@ -16,7 +16,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 md:px-6">
         <Logo variant="mark" />
         <nav className="hidden items-center gap-7 md:flex">
           {nav.map((n) => (
