@@ -14,8 +14,13 @@ import {
   Check,
   MapPin,
 } from "lucide-react";
-import heroImg from "@/assets/hero-student.jpg";
-import parentImg from "@/assets/parent-student.jpg";
+import { RotatingImage } from "@/components/RotatingImage";
+import hero1 from "@/assets/hero-1.jpg";
+import hero2 from "@/assets/hero-2.jpg";
+import hero3 from "@/assets/hero-3.jpg";
+import parent1 from "@/assets/parent-1.jpg";
+import parent2 from "@/assets/parent-2.jpg";
+import parent3 from "@/assets/parent-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -67,12 +72,10 @@ function Home() {
           <div className="relative">
             <div className="absolute -inset-6 rounded-[2.5rem] bg-primary/10 blur-2xl" aria-hidden />
             <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card shadow-2xl">
-              <img
-                src={heroImg}
+              <RotatingImage
+                images={[hero1, hero2, hero3]}
                 alt="Student smiling during a virtual tutoring session"
-                width={1536}
-                height={1280}
-                className="aspect-[4/5] w-full object-cover md:aspect-[5/6]"
+                className="aspect-[4/5] w-full md:aspect-[5/6]"
               />
             </div>
             {/* Floating cards */}
@@ -140,13 +143,10 @@ function Home() {
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="relative order-2 md:order-1">
             <div className="absolute -inset-4 rounded-[2rem] bg-blush/40 blur-2xl" aria-hidden />
-            <img
-              src={parentImg}
+            <RotatingImage
+              images={[parent1, parent2, parent3]}
               alt="A parent and teen smiling together at a laptop"
-              loading="lazy"
-              width={1024}
-              height={1024}
-              className="relative w-full rounded-3xl object-cover shadow-xl"
+              className="relative aspect-square w-full rounded-3xl shadow-xl"
             />
           </div>
           <div className="order-1 md:order-2">
