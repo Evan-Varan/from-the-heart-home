@@ -6,7 +6,6 @@ import { RotatingImage } from "@/components/RotatingImage";
 import tutor1 from "@/assets/tutor-1.jpg";
 import tutor2 from "@/assets/tutor-2.jpg";
 import tutor3 from "@/assets/tutor-3.jpg";
-import logoMark from "@/assets/logo-mark.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

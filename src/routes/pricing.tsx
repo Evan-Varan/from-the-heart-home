@@ -8,6 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import logoMark from "@/assets/logo-mark.png";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -57,7 +58,10 @@ function PricingPage() {
           <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-card p-8 shadow-xl">
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-blush/50 blur-3xl" aria-hidden />
             <div className="relative">
-              <p className="text-sm font-medium uppercase tracking-widest text-primary">Per Session</p>
+              <div className="flex items-center gap-2 text-primary">
+                <img src={logoMark} alt="" aria-hidden className="h-8 w-8" />
+                <span className="text-sm font-medium uppercase tracking-widest">Per Session</span>
+              </div>
               <div className="mt-3 flex items-baseline gap-1">
                 <span className="text-6xl font-semibold tracking-tight">$70</span>
                 <span className="text-muted-foreground">/ 60 min</span>
@@ -84,6 +88,7 @@ function PricingPage() {
       <Section className="bg-secondary/40">
         <div className="mx-auto max-w-3xl">
           <div className="text-center">
+            <img src={logoMark} alt="" aria-hidden className="pointer-events-none mx-auto mb-4 h-12 w-12 opacity-90" />
             <Eyebrow>FAQ</Eyebrow>
             <h2 className="mt-5 text-3xl font-semibold md:text-4xl">Questions parents ask us most</h2>
           </div>

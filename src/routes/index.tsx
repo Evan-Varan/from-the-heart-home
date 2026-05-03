@@ -104,12 +104,6 @@ function Home() {
               </div>
               <p className="text-xs text-muted-foreground">from 200+ parent reviews</p>
             </div>
-            <img
-              src={logoMark}
-              alt=""
-              aria-hidden
-              className="pointer-events-none absolute -bottom-6 -right-6 hidden h-24 w-24 rotate-6 opacity-90 drop-shadow-lg md:block"
-            />
           </div>
         </div>
       </section>
@@ -157,6 +151,7 @@ function Home() {
             />
           </div>
           <div className="order-1 md:order-2">
+            <img src={logoMark} alt="" aria-hidden className="pointer-events-none mb-4 h-12 w-12 opacity-90" />
             <Eyebrow>Why parents choose us</Eyebrow>
             <h2 className="mt-4 text-3xl font-semibold leading-tight md:text-4xl">
               The opposite of a tutoring chain.
@@ -270,7 +265,7 @@ function Home() {
               <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-blush/60 blur-3xl" aria-hidden />
               <div className="relative">
                 <div className="flex items-center gap-2 text-primary">
-                  <img src={logoMark} alt="" aria-hidden className="h-5 w-5" />
+                  <img src={logoMark} alt="" aria-hidden className="h-8 w-8" />
                   <span className="text-xs font-medium uppercase tracking-widest">Per Session</span>
                 </div>
                 <div className="mt-3 flex items-baseline gap-2">

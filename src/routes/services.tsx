@@ -11,6 +11,7 @@ import {
   PencilRuler,
   Languages,
 } from "@/components/icons";
+import logoMark from "@/assets/logo-mark.png";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -65,6 +66,7 @@ function ServicesPage() {
       <Section className="bg-secondary/40">
         <div className="grid items-center gap-8 md:grid-cols-3">
           <div className="md:col-span-2">
+            <img src={logoMark} alt="" aria-hidden className="pointer-events-none mb-4 h-12 w-12 opacity-90" />
             <h2 className="text-3xl font-semibold md:text-4xl">Built for high school. Loved by every grade.</h2>
             <p className="mt-4 text-muted-foreground">
               We specialize in supporting high schoolers through the toughest stretch of their academic
