@@ -19,13 +19,13 @@ export function Logo({
         <img
           src={logoMark}
           alt="From the Heart Tutoring"
-          className="h-12 w-12 object-contain"
+          className="h-12 w-12 object-contain md:h-14 md:w-14"
         />
       ) : (
         <img
           src={logoFull}
           alt="From the Heart Tutoring"
-          className="h-12 w-auto object-contain md:h-14"
+          className="h-14 w-auto object-contain md:h-16"
         />
       )}
     </Link>
