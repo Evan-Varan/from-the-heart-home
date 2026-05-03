@@ -23,7 +23,7 @@ function PortalPage() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blush/40 via-cream to-background" aria-hidden />
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 md:grid-cols-2 md:py-24 md:px-6">
         <div className="flex flex-col justify-center">
-          <Logo />
+          <Logo variant="mark" />
           <h1 className="mt-8 text-4xl font-semibold leading-tight md:text-5xl">
             Welcome back.
           </h1>
