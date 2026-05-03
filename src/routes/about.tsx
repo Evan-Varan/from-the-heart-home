@@ -3,9 +3,9 @@ import { Section, Eyebrow } from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import { Heart, Progress, Users } from "@/components/icons";
 import { RotatingImage } from "@/components/RotatingImage";
-import tutor1 from "@/assets/tutor-1.jpg";
-import tutor2 from "@/assets/tutor-2.jpg";
-import tutor3 from "@/assets/tutor-3.jpg";
+import tutor1 from "@/assets/tutor-teacher-coffee.optimized.jpg";
+import tutor2 from "@/assets/tutor-college-man-flannel.optimized.jpg";
+import tutor3 from "@/assets/tutor-man-blue-jacket.optimized.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -52,7 +52,7 @@ function AboutPage() {
             <div className="absolute -inset-4 rounded-[2rem] bg-blush/40 blur-2xl" aria-hidden />
             <RotatingImage
               images={[tutor1, tutor2, tutor3]}
-              alt="A tutor smiling during a virtual session"
+              alt="Tutors and students working during online sessions"
               className="relative aspect-square w-full rounded-3xl shadow-xl"
             />
           </div>

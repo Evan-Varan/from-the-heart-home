@@ -11,6 +11,18 @@ export function RotatingImage({ images, alt, className = "", intervalMs = 4500 }
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
+    const preloaders = images.map((src) => {
+      const img = new Image();
+      img.decoding = "async";
+      img.src = src;
+      void img.decode?.().catch(() => undefined);
+      return img;
+    });
+
+    return () => preloaders.forEach((img) => (img.src = ""));
+  }, [images]);
+
+  useEffect(() => {
     if (images.length <= 1) return;
     const t = setInterval(() => setIdx((i) => (i + 1) % images.length), intervalMs);
     return () => clearInterval(t);
@@ -24,14 +36,13 @@ export function RotatingImage({ images, alt, className = "", intervalMs = 4500 }
           src={src}
           alt={i === 0 ? alt : ""}
           aria-hidden={i === idx ? undefined : true}
-          loading={i === 0 ? "eager" : "lazy"}
+          loading="eager"
+          decoding="async"
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
             i === idx ? "opacity-100" : "opacity-0"
           }`}
         />
       ))}
-      {/* spacer to preserve aspect ratio set by parent via aspect-* classes */}
-      <img src={images[0]} alt="" aria-hidden className="invisible h-full w-full object-cover" />
     </div>
   );
 }

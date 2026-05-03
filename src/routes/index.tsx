@@ -15,12 +15,12 @@ import {
   MapPin,
 } from "@/components/icons";
 import { RotatingImage } from "@/components/RotatingImage";
-import hero1 from "@/assets/hero-1.jpg";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
-import parent1 from "@/assets/parent-1.jpg";
-import parent2 from "@/assets/parent-2.jpg";
-import parent3 from "@/assets/parent-3.jpg";
+import hero1 from "@/assets/hero-boy-headphones.optimized.jpg";
+import hero2 from "@/assets/hero-girl-red-hair-laptop.optimized.jpg";
+import hero3 from "@/assets/hero-teenage-boy-laptop.optimized.jpg";
+import parent1 from "@/assets/parent-young-girl-mother.optimized.jpg";
+import parent2 from "@/assets/parent-young-boy-laptop-plant.optimized.jpg";
+import parent3 from "@/assets/parent-teenage-girl-orange-shirt.optimized.jpg";
 import logoMark from "@/assets/logo-mark.png";
 
 export const Route = createFileRoute("/")({
@@ -75,7 +75,7 @@ function Home() {
             <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card shadow-2xl">
               <RotatingImage
                 images={[hero1, hero2, hero3]}
-                alt="Student smiling during a virtual tutoring session"
+                alt="Student working during a virtual tutoring session"
                 className="aspect-[4/5] w-full md:aspect-[5/6]"
               />
             </div>
@@ -146,7 +146,7 @@ function Home() {
             <div className="absolute -inset-4 rounded-[2rem] bg-blush/40 blur-2xl" aria-hidden />
             <RotatingImage
               images={[parent1, parent2, parent3]}
-              alt="A parent and teen smiling together at a laptop"
+              alt="Students and families working at laptops"
               className="relative aspect-square w-full rounded-3xl shadow-xl"
             />
           </div>
