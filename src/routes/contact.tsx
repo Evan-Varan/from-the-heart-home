@@ -53,14 +53,14 @@ function ContactPage() {
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><Mail className="h-5 w-5"/></span>
                 <div>
                   <p className="text-sm font-medium">Email us</p>
-                  <p className="text-sm text-muted-foreground">hello@fromthehearttutoring.com</p>
+                  <p className="text-sm text-muted-foreground">info@fromthehearttutoring.com</p>
                 </div>
               </a>
               <a href="tel:5551234567" className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 transition hover:border-primary/40">
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><Phone className="h-5 w-5"/></span>
                 <div>
                   <p className="text-sm font-medium">Call or text</p>
-                  <p className="text-sm text-muted-foreground">(555) 123-4567</p>
+                  <p className="text-sm text-muted-foreground">(512) 966-6064</p>
                 </div>
               </a>
               <Link to="/portal" className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 transition hover:border-primary/40">

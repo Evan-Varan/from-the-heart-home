@@ -151,7 +151,7 @@ function Home() {
             />
           </div>
           <div className="order-1 md:order-2">
-            <img src={logoMark} alt="" aria-hidden className="pointer-events-none mb-4 h-12 w-12 opacity-90" />
+            <img src={logoMark} alt="" aria-hidden width={790} height={790} className="pointer-events-none mb-4 h-8 w-8 opacity-90" />
             <Eyebrow>Why parents choose us</Eyebrow>
             <h2 className="mt-4 text-3xl font-semibold leading-tight md:text-4xl">
               The opposite of a tutoring chain.
@@ -214,7 +214,7 @@ function Home() {
       {/* HOW IT WORKS */}
       <Section className="bg-secondary/40">
         <div className="relative text-center">
-          <img src={logoMark} alt="" aria-hidden className="pointer-events-none mx-auto mb-4 h-12 w-12 opacity-90" />
+          <img src={logoMark} alt="" aria-hidden width={790} height={790} className="pointer-events-none mx-auto mb-4 h-8 w-8 opacity-90" />
           <Eyebrow>How it works</Eyebrow>
           <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Three simple steps.</h2>
         </div>
@@ -265,7 +265,7 @@ function Home() {
               <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-blush/60 blur-3xl" aria-hidden />
               <div className="relative">
                 <div className="flex items-center gap-2 text-primary">
-                  <img src={logoMark} alt="" aria-hidden className="h-8 w-8" />
+                  <img src={logoMark} alt="" aria-hidden width={790} height={790} className="h-6 w-6" />
                   <span className="text-xs font-medium uppercase tracking-widest">Per Session</span>
                 </div>
                 <div className="mt-3 flex items-baseline gap-2">
@@ -290,26 +290,87 @@ function Home() {
       {/* TESTIMONIALS */}
       <Section className="bg-secondary/40">
         <div className="relative text-center">
-          <img src={logoMark} alt="" aria-hidden className="pointer-events-none mx-auto mb-4 h-12 w-12 opacity-90" />
+          <img src={logoMark} alt="" aria-hidden width={790} height={790} className="pointer-events-none mx-auto mb-4 h-8 w-8 opacity-90" />
           <Eyebrow>Parent stories</Eyebrow>
           <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Loved by families nationwide.</h2>
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {[
-            { name: "Sarah M.", role: "Parent · 11th grade", body: "Our tutor knows our daughter so well now. Her algebra grade went from a C to an A-, but more importantly, she actually likes math again." },
-            { name: "James & Priya R.", role: "Parents · 9th grade", body: "It feels like having a supportive aunt who happens to be brilliant at chemistry. The personal touch is unmatched." },
-            { name: "Daniel K.", role: "Parent · 7th grade", body: "We tried a big-name service first. From the Heart is on a different planet — actual humans, actual care." },
+            {
+              name: "Kelly C.",
+              role: "Parent · 7th grade math",
+              body: "My Daughter started 7th grade Excel math this year. Within the first couple of weeks, she had such a bad panic attack over a test I had to pick her up from school. So I went online and read so many reviews and reached out to friends for recommendations. Something about From the Heart seemed like it could be a good match so I reached out. Best decision ever. Beth guided me through everything. Listened to my story and we did our first session with Evan and we were hooked. He was so amazing with my daughter. Knew all of the math. Helped her to figure out what her math teacher wanted at times and was patient and so KIND! Madison took to him so well. Her confidence in math has skyrocketed. She got straight A's and has a 97 in math. And the cherry on top she took the 8th-grade star test since she is in Excel 7th-grade math and came home saying it was easy! Can't wait to work with Evan next year and any other years he is willing to assist us. Bravo Evan.",
+              featured: true,
+            },
+            {
+              name: "Maerie A.",
+              role: "Parent · Homework support",
+              body: "Thank you!!! We finished homework this weekend with ZERO fights or breakdowns!!! You (Beth) are great at breaking it down for my son to understand it.",
+            },
+            {
+              name: "K. Fulkes.",
+              role: "Parent · Summer math",
+              body: "My son likes Sam. He wasn't excited that I signed him up for Math in the Summer. However, they bonded over an Xbox video game so that opened his mind a bit. He said Sam explains things better than his 6th grade teacher ever did.",
+            },
+            {
+              name: "A. Garcia.",
+              role: "Parent · Dysgraphia support",
+              body: "I just wanted to let you know that we loved our new tutor Jason! He is very knowledgeable about dysgraphia and had some great ideas and tips moving forward. He really connected with Jason.",
+            },
+            {
+              name: "Diana L.",
+              role: "Parent · Test confidence",
+              body: "Hi! Just wanted to send you a quick message to let you know that Evan got it out of the park with Leo last night. Leo says Evan is a genius and he felt so much more confident with the material. Thank you so much for making that happen! Cheers!",
+            },
+            {
+              name: "Holly Danko.",
+              role: "Parent · Ongoing tutoring",
+              body: "Dianne has been an absolutely wonderful tutor and Marissa has been doing so well with all of Dianne's efforts. We plan to continue tutoring once she returns to school in the fall. This has been a very positive experience and we are grateful for your services!",
+            },
+            {
+              name: "Melanie Skipper-Relyea.",
+              role: "Parent · SAT math",
+              body: "BETH!!!!!!! Gabe's SAT Math score is a 510!!! Up from 370!!!! Total score 1100!!!!!!",
+            },
+            {
+              name: "Michelle W.",
+              role: "Parent · 7th and 9th grade",
+              body: "Both my kids (7th grade and 9th grade) were tutored in Math last summer by Evan. I really appreciated Beth's flexibility on working with our summer schedule. Both my kids enjoyed their sessions with Evan and said they felt well-prepared when they started the school year.",
+            },
+            {
+              name: "Ruth G.",
+              role: "Parent · Geometry prep",
+              body: "Julia has really enjoyed tutoring with Dianne. She's a fantastic tutor. Dianne is attentive and patient and Julia values her time with her. We look forward to starting again next school year for geometry. I have recommended Dianne and From the Heart tutoring to my friends.",
+            },
+            {
+              name: "Anonymous.",
+              role: "Parent · 3rd grade math",
+              body: "Beth is a great teacher helping my son with his 3rd-grade math. Very patient and explains well. My son prefers her helping him to me! On-time and with no issues.",
+            },
+            {
+              name: "Ana.",
+              role: "Student · College Certification exam",
+              body: "Beth! This is Ana! I passed my certification exam! Thanks so much for your help and guidance. You're wonderful! Have an amazing weekend!",
+            },
+            {
+              name: "Ndeye T.",
+              role: "Parent · Student confidence",
+              body: "I have never seen him excited about a class with anyone else before, so you [Evan] know how to get to him and thanks for that!",
+            },
           ].map((t) => (
-            <figure key={t.name} className="rounded-3xl border border-border bg-card p-7 shadow-sm">
+            <figure
+              key={t.name}
+              className={`flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-sm ${t.featured ? "md:col-span-3" : ""}`}
+            >
               <div className="flex">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
-              <blockquote className="mt-4 text-[15px] leading-relaxed text-foreground/90">
+              <blockquote className="mt-4 flex-1 font-sans text-sm leading-relaxed text-muted-foreground">
                 &ldquo;{t.body}&rdquo;
               </blockquote>
-              <figcaption className="mt-5 flex items-center gap-3">
+              <figcaption className="mt-5 flex items-center gap-3 font-sans">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <GraduationCap className="h-5 w-5" />
                 </div>

@@ -26,8 +26,8 @@ export function SiteFooter() {
         <div>
           <h4 className="text-sm font-semibold text-foreground">Get in touch</h4>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-primary"/><span>hello@fromthehearttutoring.com</span></li>
-            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-primary"/><span>(555) 123-4567</span></li>
+            <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-primary"/><span>info@fromthehearttutoring.com</span></li>
+            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-primary"/><span>Text us at (512)-966-6064</span></li>
             <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-primary"/><span>Virtual sessions, nationwide</span></li>
           </ul>
         </div>
