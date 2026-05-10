@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, Eyebrow } from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import { Check, MessageCircleHeart, GraduationCap, CalendarHeart, Heart } from "@/components/icons";
-import { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -236,9 +235,6 @@ const faqCategories = [
 ];
 
 function PricingPage() {
-  const [activeCategory, setActiveCategory] = useState(
-    faqCategories[0].title.toLowerCase().replaceAll(" ", "-"),
-  );
   return (
     <>
       <Section className="pt-12 md:pt-20">
@@ -283,140 +279,55 @@ function PricingPage() {
         </div>
       </Section>
 
-      <Section className="relative overflow-hidden bg-gradient-to-b from-secondary/30 via-cream to-blush/30">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 top-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-24 bottom-12 h-96 w-96 rounded-full bg-blush/60 blur-3xl"
-        />
-        <img
-          src={logoMark}
-          alt=""
-          aria-hidden
-          className="pointer-events-none absolute right-6 top-10 h-24 w-24 rotate-12 opacity-10 md:h-40 md:w-40"
-        />
-
-        <div className="relative">
-          <div className="mx-auto max-w-2xl text-center">
+      <Section className="bg-secondary/40">
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center">
             <Eyebrow>FAQ</Eyebrow>
-            <h2 className="mt-5 font-display text-4xl font-semibold leading-tight md:text-5xl">
-              Questions parents <span className="italic text-primary">actually</span> ask us
+            <h2 className="mt-5 font-display text-3xl font-semibold md:text-4xl">
+              Questions parents ask us most
             </h2>
-            <p className="mt-4 text-muted-foreground">
-              Skim a category, or read the whole thing — there&rsquo;s no fluff, just honest answers.
+            <p className="mt-3 text-muted-foreground">
+              Honest answers, organized by topic.
             </p>
           </div>
 
-          <div className="mx-auto mt-12 grid max-w-6xl gap-8 lg:grid-cols-[280px_1fr]">
-            {/* Category nav */}
-            <nav className="lg:sticky lg:top-24 lg:self-start" aria-label="FAQ categories">
-              <ul className="flex flex-row gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-3 lg:overflow-visible lg:pb-0">
-                {faqCategories.map((category) => {
-                  const key = category.title.toLowerCase().replaceAll(" ", "-");
-                  const isActive = activeCategory === key;
-                  const Icon = category.icon;
-                  return (
-                    <li key={key} className="flex-none lg:flex-auto">
-                      <a
-                        href={`#${key}`}
-                        onClick={() => setActiveCategory(key)}
-                        className={`group flex items-center gap-3 rounded-2xl border px-4 py-3 text-left text-sm font-medium transition-all ${
-                          isActive
-                            ? "border-primary/30 bg-card shadow-md shadow-primary/10"
-                            : "border-transparent bg-card/50 hover:border-primary/20 hover:bg-card"
-                        }`}
-                      >
-                        <span
-                          className={`flex h-9 w-9 flex-none items-center justify-center rounded-xl transition-colors ${
-                            isActive ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"
-                          }`}
-                        >
-                          <Icon className="h-4 w-4" />
-                        </span>
-                        <span className="flex flex-col">
-                          <span className="whitespace-nowrap lg:whitespace-normal">{category.title}</span>
-                          <span className="hidden text-xs font-normal text-muted-foreground lg:inline">
-                            {category.items.length} {category.items.length === 1 ? "question" : "questions"}
-                          </span>
-                        </span>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-
-            {/* Accordion content */}
-            <div className="space-y-12">
-              {faqCategories.map((category, catIdx) => {
-                const categoryKey = category.title.toLowerCase().replaceAll(" ", "-");
-                const Icon = category.icon;
-                return (
-                  <div
-                    key={category.title}
-                    id={categoryKey}
-                    className="scroll-mt-24"
-                    onMouseEnter={() => setActiveCategory(categoryKey)}
-                  >
-                    <div className="mb-6 flex items-start gap-4">
-                      <span className="flex h-12 w-12 flex-none items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/70 text-primary-foreground shadow-lg shadow-primary/20">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/70">
-                          {String(catIdx + 1).padStart(2, "0")} — Section
-                        </div>
-                        <h3 className="mt-1 font-display text-2xl font-semibold md:text-3xl">
-                          {category.title}
-                        </h3>
-                        <p className="mt-1 text-sm text-muted-foreground">{category.blurb}</p>
-                      </div>
-                    </div>
-
-                    <Accordion
-                      type="single"
-                      collapsible
-                      defaultValue={catIdx === 0 ? `${categoryKey}-0` : undefined}
-                      className="space-y-3"
-                    >
-                      {category.items.map((f, i) => (
-                        <AccordionItem
-                          key={f.q}
-                          value={`${categoryKey}-${i}`}
-                          className="group overflow-hidden rounded-2xl border border-border/70 bg-card/80 px-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:shadow-md data-[state=open]:border-primary/40 data-[state=open]:bg-card data-[state=open]:shadow-lg data-[state=open]:shadow-primary/5"
-                        >
-                          <AccordionTrigger className="gap-4 py-5 text-left text-base font-semibold hover:no-underline [&>svg]:text-primary">
-                            <span className="flex items-start gap-4">
-                              <span className="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary group-data-[state=open]:bg-primary group-data-[state=open]:text-primary-foreground">
-                                {i + 1}
-                              </span>
-                              <span>{f.q}</span>
-                            </span>
-                          </AccordionTrigger>
-                          <AccordionContent className="pl-11 pr-2 font-sans text-sm leading-relaxed text-muted-foreground">
-                            {f.a}
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
+          <div className="mt-10 space-y-10">
+            {faqCategories.map((category, catIdx) => {
+              const categoryKey = category.title.toLowerCase().replaceAll(" ", "-");
+              const Icon = category.icon;
+              return (
+                <div key={category.title} id={categoryKey} className="scroll-mt-24">
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <h3 className="font-display text-xl font-semibold">{category.title}</h3>
                   </div>
-                );
-              })}
 
-              <div className="rounded-3xl border border-primary/20 bg-card/80 p-8 text-center shadow-sm backdrop-blur-sm">
-                <img src={logoMark} alt="" aria-hidden width={790} height={790} className="mx-auto h-12 w-12" />
-                <h3 className="mt-3 font-display text-2xl font-semibold">Still have a question?</h3>
-                <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-                  We answer every message ourselves — no bots, no scripts, just real people who care.
-                </p>
-                <Button asChild size="lg" className="mt-5 rounded-full">
-                  <Link to="/contact">Reach out</Link>
-                </Button>
-              </div>
-            </div>
+                  <Accordion
+                    type="single"
+                    collapsible
+                    defaultValue={catIdx === 0 ? `${categoryKey}-0` : undefined}
+                    className="space-y-2"
+                  >
+                    {category.items.map((f, i) => (
+                      <AccordionItem
+                        key={f.q}
+                        value={`${categoryKey}-${i}`}
+                        className="rounded-xl border border-border bg-card px-5 transition-colors data-[state=open]:border-primary/30"
+                      >
+                        <AccordionTrigger className="text-left text-base font-semibold hover:no-underline [&>svg]:text-primary">
+                          {f.q}
+                        </AccordionTrigger>
+                        <AccordionContent className="font-sans text-sm leading-relaxed text-muted-foreground">
+                          {f.a}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </div>
+              );
+            })}
           </div>
         </div>
       </Section>
