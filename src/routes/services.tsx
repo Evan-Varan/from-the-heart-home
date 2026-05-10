@@ -32,7 +32,7 @@ const subjects = [
   { icon: ClipboardCheck, title: "Test Prep", desc: "SAT, ACT, PSAT and subject-specific exams." },
   { icon: Brain, title: "Study Skills", desc: "Time management, note-taking and exam strategy." },
   { icon: PencilRuler, title: "Homework Help", desc: "Weekly check-ins to keep students on track." },
-  { icon: Languages, title: "Foreign Language", desc: "Spanish and French at beginner to AP levels." },
+  { icon: Languages, title: "Foreign Language", desc: "Spanish from fluent speakers." },
   { icon: GraduationCap, title: "College Support", desc: "Intro courses, essays, and study coaching." },
 ];
 

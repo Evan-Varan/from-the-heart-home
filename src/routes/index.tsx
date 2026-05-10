@@ -88,7 +88,7 @@ function Home() {
                   <div className="h-8 w-8 rounded-full bg-primary/30 ring-2 ring-card" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold">500+ families</p>
+                  <p className="text-sm font-semibold">250+ Families</p>
                   <p className="text-xs text-muted-foreground">trust us nationwide</p>
                 </div>
               </div>
