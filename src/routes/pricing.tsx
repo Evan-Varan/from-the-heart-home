@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, Eyebrow } from "@/components/Section";
 import { Button } from "@/components/ui/button";
-import { Check } from "@/components/icons";
+import { Check, MessageCircleHeart, GraduationCap, CalendarHeart, Heart } from "@/components/icons";
+import { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -34,6 +35,8 @@ const includes = [
 const faqCategories = [
   {
     title: "General Questions",
+    icon: MessageCircleHeart,
+    blurb: "The basics about who we tutor and how we hire.",
     items: [
       {
         q: "What age groups do you tutor?",
@@ -80,6 +83,8 @@ const faqCategories = [
   },
   {
     title: "Tutoring Process",
+    icon: GraduationCap,
+    blurb: "What learning with us actually looks like.",
     items: [
       {
         q: "How do you match students with tutors?",
@@ -130,6 +135,8 @@ const faqCategories = [
   },
   {
     title: "Scheduling and Logistics",
+    icon: CalendarHeart,
+    blurb: "Frequency, cancellations, and how we plan around your week.",
     items: [
       {
         q: "How often should my child meet with a tutor?",
@@ -164,6 +171,8 @@ const faqCategories = [
   },
   {
     title: "Pricing and Payments",
+    icon: Heart,
+    blurb: "Rates, billing, and the little perks along the way.",
     items: [
       {
         q: "How much does a session cost?",
