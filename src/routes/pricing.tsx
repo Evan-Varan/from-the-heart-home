@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, Eyebrow } from "@/components/Section";
 import { Button } from "@/components/ui/button";
-import { Check, MessageCircleHeart, GraduationCap, CalendarHeart, Heart } from "@/components/icons";
+import { Check, MessageCircleHeart, GraduationCap, CalendarHeart } from "@/components/icons";
 import {
   Accordion,
   AccordionContent,
