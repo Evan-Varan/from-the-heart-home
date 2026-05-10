@@ -407,7 +407,7 @@ function PricingPage() {
               })}
 
               <div className="rounded-3xl border border-primary/20 bg-card/80 p-8 text-center shadow-sm backdrop-blur-sm">
-                <Heart className="mx-auto h-8 w-8 text-primary" />
+                <img src={logoMark} alt="" aria-hidden width={790} height={790} className="mx-auto h-12 w-12" />
                 <h3 className="mt-3 font-display text-2xl font-semibold">Still have a question?</h3>
                 <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
                   We answer every message ourselves — no bots, no scripts, just real people who care.
