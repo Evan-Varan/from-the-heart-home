@@ -83,9 +83,19 @@ function Home() {
             <div className="absolute -left-4 bottom-6 hidden rounded-2xl border border-border bg-card/95 p-4 shadow-xl backdrop-blur md:block">
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-2">
-                  <div className="h-8 w-8 rounded-full bg-blush ring-2 ring-card" />
-                  <div className="h-8 w-8 rounded-full bg-accent ring-2 ring-card" />
-                  <div className="h-8 w-8 rounded-full bg-primary/30 ring-2 ring-card" />
+                  {[
+                    { initials: "KC", label: "Kelly C.", className: "bg-blush text-primary" },
+                    { initials: "MA", label: "Maerie A.", className: "bg-accent text-accent-foreground" },
+                    { initials: "RG", label: "Ruth G.", className: "bg-primary/15 text-primary" },
+                  ].map((avatar) => (
+                    <div
+                      key={avatar.initials}
+                      aria-label={avatar.label}
+                      className={`flex h-8 w-8 items-center justify-center rounded-full ring-2 ring-card ${avatar.className}`}
+                    >
+                      <span className="font-sans text-[10px] font-semibold leading-none">{avatar.initials}</span>
+                    </div>
+                  ))}
                 </div>
                 <div>
                   <p className="text-sm font-semibold">250+ Families</p>
