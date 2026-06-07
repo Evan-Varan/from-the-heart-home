@@ -49,8 +49,6 @@ const sendContactEmail = createServerFn({ method: "POST" })
       process.env.RESEND_FROM_EMAIL ?? "From the Heart Tutoring <info@fromthehearttutoring.com>";
 
     const logoUrl = buildAbsoluteUrl(siteUrl, "logo-full.png");
-    const heroUrl = buildAbsoluteUrl(siteUrl, "email-hero.jpg");
-
     if (!apiKey) {
       throw new Error("Email is not configured. Missing RESEND_API_KEY.");
     }
@@ -101,7 +99,6 @@ const sendContactEmail = createServerFn({ method: "POST" })
           contactEmail: toEmail,
           parentName: data.parent,
           logoUrl,
-          heroUrl,
           siteUrl,
         }),
       }),
@@ -187,14 +184,12 @@ function buildParentConfirmationEmail({
   fields,
   parentName,
   logoUrl,
-  heroUrl,
   siteUrl,
 }: {
   contactEmail: string;
   fields: EmailField[];
   parentName: string;
   logoUrl?: string;
-  heroUrl?: string;
   siteUrl: string;
 }) {
   const sections = [
@@ -216,7 +211,6 @@ function buildParentConfirmationEmail({
 
   return buildEmailLayout({
     logoUrl,
-    heroUrl,
     siteUrl,
     preheader: "We've received your request",
     eyebrow: "Thank You",
