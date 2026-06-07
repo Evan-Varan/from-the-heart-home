@@ -4,14 +4,15 @@
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
+  "workers_dev": true,
   "routes": [
     {
-      "pattern": "fromthehearttutoring.com",
-      "custom_domain": true,
+      "pattern": "fromthehearttutoring.com/*",
+      "zone_name": "fromthehearttutoring.com",
     },
     {
-      "pattern": "www.fromthehearttutoring.com",
-      "custom_domain": true,
+      "pattern": "www.fromthehearttutoring.com/*",
+      "zone_name": "fromthehearttutoring.com",
     },
   ],
   "vars": {
