@@ -36,15 +36,12 @@ const sendContactEmail = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const apiKey = process.env.RESEND_API_KEY;
 
-    // Dynamically determine the site URL for absolute image paths
-    let siteUrl = process.env.CONTACT_SITE_URL;
-    if (!siteUrl) {
-      try {
-        const url = getRequestUrl({ xForwardedHost: true, xForwardedProto: true });
-        siteUrl = url.origin;
-      } catch (e) {
-        siteUrl = CONTACT_SITE_URL;
-      }
+    let siteUrl = CONTACT_SITE_URL;
+    try {
+      const url = getRequestUrl({ xForwardedHost: true, xForwardedProto: true });
+      siteUrl = url.origin;
+    } catch {
+      siteUrl = process.env.CONTACT_SITE_URL ?? CONTACT_SITE_URL;
     }
 
     const toEmail = process.env.CONTACT_TO_EMAIL ?? CONTACT_TO_EMAIL;
