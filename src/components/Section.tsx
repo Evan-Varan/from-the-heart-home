@@ -12,7 +12,10 @@ export function Section({
   bleed?: boolean;
 }) {
   return (
-    <section id={id} className={`py-16 md:py-24 ${className}`}>
+    <section
+      id={id}
+      className={`py-16 [content-visibility:auto] [contain-intrinsic-size:auto_900px] md:py-24 ${className}`}
+    >
       <div className={bleed ? "" : "mx-auto max-w-6xl px-4 md:px-6"}>{children}</div>
     </section>
   );
