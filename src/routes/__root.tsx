@@ -5,6 +5,9 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { buildSeo, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
+const INTER_FONT_STYLESHEET =
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -64,14 +67,23 @@ export const Route = createRootRoute({
         },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
-        },
-        {
-          rel: "stylesheet",
           href: appCss,
         },
       ],
-      scripts: [jsonLdScript(organizationJsonLd()), jsonLdScript(websiteJsonLd())],
+      scripts: [
+        {
+          children: `(() => {
+  const href = ${JSON.stringify(INTER_FONT_STYLESHEET)};
+  if (document.querySelector('link[href="' + href + '"]')) return;
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = href;
+  document.head.appendChild(link);
+})();`,
+        },
+        jsonLdScript(organizationJsonLd()),
+        jsonLdScript(websiteJsonLd()),
+      ],
     };
   },
   shellComponent: RootShell,
