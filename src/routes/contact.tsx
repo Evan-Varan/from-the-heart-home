@@ -10,30 +10,27 @@ import { ArrowRight, CalendarHeart, EnvelopeSimple as Mail, Lock, Phone } from "
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { FormEvent, useState } from "react";
-import { z } from "zod";
 import { buildSeo } from "@/lib/seo";
 
 declare const process: {
   env: Record<string, string | undefined>;
 };
 
-const contactFormSchema = z.object({
-  parent: z.string().trim().min(1, "Parent name is required.").max(120),
-  email: z.string().trim().email("A valid email is required.").max(254),
-  phone: z.string().trim().max(50).optional(),
-  grade: z.string().trim().max(80).optional(),
-  subject: z.string().trim().max(160).optional(),
-  msg: z.string().trim().max(2000).optional(),
-});
-
-type ContactFormData = z.infer<typeof contactFormSchema>;
+type ContactFormData = {
+  parent: string;
+  email: string;
+  phone?: string;
+  grade?: string;
+  subject?: string;
+  msg?: string;
+};
 
 const CONTACT_TO_EMAIL = "info@fromthehearttutoring.com";
 const CONTACT_SITE_URL = "https://fromthehearttutoring.com";
 const BRAND_NAME = "From the Heart Tutoring";
 
 const sendContactEmail = createServerFn({ method: "POST" })
-  .inputValidator((data: ContactFormData) => contactFormSchema.parse(data))
+  .inputValidator(validateContactFormData)
   .handler(async ({ data }) => {
     const apiKey = process.env.RESEND_API_KEY;
 
@@ -107,6 +104,54 @@ const sendContactEmail = createServerFn({ method: "POST" })
 
     return { success: true };
   });
+
+function validateContactFormData(data: unknown): ContactFormData {
+  if (!data || typeof data !== "object") {
+    throw new Error("Invalid contact form submission.");
+  }
+
+  const fields = data as Record<string, unknown>;
+  const parent = requiredString(fields.parent, "Parent name is required.", 120);
+  const email = requiredString(fields.email, "A valid email is required.", 254);
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new Error("A valid email is required.");
+  }
+
+  return {
+    parent,
+    email,
+    phone: optionalString(fields.phone, 50),
+    grade: optionalString(fields.grade, 80),
+    subject: optionalString(fields.subject, 160),
+    msg: optionalString(fields.msg, 2000),
+  };
+}
+
+function requiredString(value: unknown, message: string, maxLength: number) {
+  const result = optionalString(value, maxLength);
+  if (!result) {
+    throw new Error(message);
+  }
+  return result;
+}
+
+function optionalString(value: unknown, maxLength: number) {
+  if (value == null) {
+    return "";
+  }
+
+  if (typeof value !== "string") {
+    throw new Error("Invalid contact form submission.");
+  }
+
+  const trimmed = value.trim();
+  if (trimmed.length > maxLength) {
+    throw new Error("Please shorten your response and try again.");
+  }
+
+  return trimmed;
+}
 
 async function sendResendEmail({
   apiKey,
@@ -388,9 +433,10 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [loading, setLoading] = useState(false);
-  const [formStatus, setFormStatus] = useState<
-    { type: "success" | "error"; message: string } | null
-  >(null);
+  const [formStatus, setFormStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
   const submitContact = useServerFn(sendContactEmail);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -416,7 +462,8 @@ function ContactPage() {
       form.reset();
       setFormStatus({
         type: "success",
-        message: "Thanks! We'll be in touch within one business day. A receipt was sent to your email.",
+        message:
+          "Thanks! We'll be in touch within one business day. A receipt was sent to your email.",
       });
       toast.success(
         "Thanks! We'll be in touch within one business day. A receipt was sent to your email.",
@@ -546,7 +593,7 @@ function ContactPage() {
                   <Textarea
                     id="msg"
                     name="msg"
-                  className="mt-1.5 min-h-28"
+                    className="mt-1.5 min-h-28"
                     placeholder="Goals, schedule, learning style…"
                   />
                 </div>

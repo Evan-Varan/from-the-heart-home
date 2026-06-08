@@ -10,7 +10,13 @@ type SeoOptions = {
   noindex?: boolean;
 };
 
-export function buildSeo({ title, description, path = "/", image = DEFAULT_IMAGE, noindex }: SeoOptions) {
+export function buildSeo({
+  title,
+  description,
+  path = "/",
+  image = DEFAULT_IMAGE,
+  noindex,
+}: SeoOptions) {
   const url = absoluteUrl(path);
   const imageUrl = absoluteUrl(image);
 
@@ -18,7 +24,7 @@ export function buildSeo({ title, description, path = "/", image = DEFAULT_IMAGE
     meta: [
       { title },
       { name: "description", content: description },
-      ...(noindex ? [{ name: "robots", content: "noindex, nofollow" }] : []),
+      ...(noindex ? [{ name: "robots", content: "noindex, follow" }] : []),
       { property: "og:site_name", content: SITE_NAME },
       { property: "og:type", content: "website" },
       { property: "og:title", content: title },
