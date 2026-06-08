@@ -9,6 +9,17 @@ type Props = {
 
 export function RotatingImage({ images, alt, className = "", intervalMs = 4500 }: Props) {
   const [idx, setIdx] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
 
   useEffect(() => {
     const preloaders = images.map((src) => {
@@ -23,10 +34,10 @@ export function RotatingImage({ images, alt, className = "", intervalMs = 4500 }
   }, [images]);
 
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (images.length <= 1 || prefersReducedMotion) return;
     const t = setInterval(() => setIdx((i) => (i + 1) % images.length), intervalMs);
     return () => clearInterval(t);
-  }, [images.length, intervalMs]);
+  }, [images.length, intervalMs, prefersReducedMotion]);
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -38,7 +49,7 @@ export function RotatingImage({ images, alt, className = "", intervalMs = 4500 }
           aria-hidden={i === idx ? undefined : true}
           loading="eager"
           decoding="async"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out motion-reduce:transition-none ${
             i === idx ? "opacity-100" : "opacity-0"
           }`}
         />

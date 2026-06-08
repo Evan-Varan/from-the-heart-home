@@ -18,13 +18,13 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 md:px-6">
         <Logo />
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-7 md:flex">
           {nav.map((n) => (
             <Link
               key={n.to}
               to={n.to}
               activeOptions={{ exact: n.to === "/" }}
-              activeProps={{ className: "text-primary" }}
+              activeProps={{ className: "text-primary", "aria-current": "page" }}
               inactiveProps={{ className: "text-foreground/70 hover:text-foreground" }}
               className="text-sm font-medium transition-colors"
             >
@@ -42,6 +42,8 @@ export function SiteHeader() {
         </div>
         <button
           aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
           onClick={() => setOpen((v) => !v)}
         >
@@ -49,15 +51,16 @@ export function SiteHeader() {
         </button>
       </div>
       {open && (
-        <div className="border-t border-border bg-background md:hidden">
+        <div id="mobile-navigation" className="border-t border-border bg-background md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4">
+            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
                 activeOptions={{ exact: n.to === "/" }}
-                activeProps={{ className: "bg-secondary text-primary" }}
+                activeProps={{ className: "bg-secondary text-primary", "aria-current": "page" }}
                 className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80"
               >
                 {n.label}
@@ -70,6 +73,7 @@ export function SiteHeader() {
             >
               Student Portal
             </Link>
+            </nav>
             <Button asChild className="mt-2 rounded-full">
               <Link to="/contact" onClick={() => setOpen(false)}>Book a Session</Link>
             </Button>

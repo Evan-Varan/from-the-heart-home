@@ -4,20 +4,25 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/Logo";
 import { CalendarHeart, Progress } from "@/components/icons";
+import { buildSeo } from "@/lib/seo";
+import { useState } from "react";
 
 export const Route = createFileRoute("/portal")({
   head: () => ({
-    meta: [
-      { title: "Student Portal — From the Heart Tutoring" },
-      { name: "description", content: "Sign in to the student portal to schedule sessions and manage your account." },
-      { property: "og:title", content: "Student Portal — From the Heart Tutoring" },
-      { property: "og:description", content: "Sign in to schedule sessions and manage your account." },
-    ],
+    ...buildSeo({
+      title: "Student Portal | From the Heart Tutoring",
+      description:
+        "Student portal for From the Heart Tutoring families to schedule sessions and manage tutoring details.",
+      path: "/portal",
+      noindex: true,
+    }),
   }),
   component: PortalPage,
 });
 
 function PortalPage() {
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
   return (
     <section className="relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-blush/40 via-cream to-background" aria-hidden />
@@ -50,18 +55,42 @@ function PortalPage() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              alert("The portal is launching soon. For now, please contact us to schedule.");
+              setStatusMessage(
+                "The portal is launching soon. For now, please contact us to schedule.",
+              );
             }}
+            aria-describedby={statusMessage ? "portal-status" : undefined}
             className="mt-6 space-y-4"
           >
             <div>
               <Label htmlFor="pemail">Email</Label>
-              <Input id="pemail" type="email" className="mt-1.5" placeholder="you@email.com" />
+              <Input
+                id="pemail"
+                name="email"
+                type="email"
+                className="mt-1.5"
+                placeholder="you@email.com"
+              />
             </div>
             <div>
               <Label htmlFor="ppass">Password</Label>
-              <Input id="ppass" type="password" className="mt-1.5" placeholder="••••••••" />
+              <Input
+                id="ppass"
+                name="password"
+                type="password"
+                className="mt-1.5"
+                placeholder="••••••••"
+              />
             </div>
+            {statusMessage && (
+              <p
+                id="portal-status"
+                role="status"
+                className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary"
+              >
+                {statusMessage}
+              </p>
+            )}
             <Button type="submit" size="lg" className="w-full rounded-full">Sign in</Button>
           </form>
 

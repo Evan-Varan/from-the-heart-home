@@ -12,15 +12,17 @@ import {
   Languages,
 } from "@/components/icons";
 import logoMark from "@/assets/logo-mark.png";
+import { buildSeo, jsonLdScript, tutoringServiceJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
-    meta: [
-      { title: "Services & Subjects — From the Heart Tutoring" },
-      { name: "description", content: "Virtual one-on-one tutoring for K–12 and college students: math, science, English, test prep, study skills and more." },
-      { property: "og:title", content: "Services & Subjects — From the Heart Tutoring" },
-      { property: "og:description", content: "Virtual one-on-one tutoring for K–12 and college students." },
-    ],
+    ...buildSeo({
+      title: "Online Tutoring Services: Math, Science, English & Test Prep",
+      description:
+        "Explore one-on-one online tutoring services for K-12 and college students, including math, science, English, writing, homework help, and SAT/ACT prep.",
+      path: "/services",
+    }),
+    scripts: [jsonLdScript(tutoringServiceJsonLd())],
   }),
   component: ServicesPage,
 });

@@ -3,6 +3,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
+import { buildSeo, jsonLdScript, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -27,26 +28,39 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "From the Heart Tutoring — Personalized Online Tutoring" },
-      { name: "description", content: "One-on-one virtual tutoring for K–12 and college students across the U.S. Personalized, caring, and built to help your student succeed." },
-      { name: "author", content: "From the Heart Tutoring" },
-      { property: "og:title", content: "From the Heart Tutoring — Personalized Online Tutoring" },
-      { property: "og:description", content: "Caring, one-on-one virtual tutoring for K–12 and college students nationwide." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
+  head: () => {
+    const seo = buildSeo({
+      title: "Online Tutoring for K-12 & College Students | From the Heart Tutoring",
+      description:
+        "Personalized one-on-one online tutoring for K-12 and college students across the U.S. Caring virtual tutors for math, science, English, and test prep.",
+    });
+
+    return {
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "author", content: "From the Heart Tutoring" },
+        ...seo.meta,
+      ],
+      links: [
+        ...seo.links,
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/favicon.png",
+        },
+        {
+          rel: "apple-touch-icon",
+          href: "/apple-touch-icon.png",
+        },
+        {
+          rel: "stylesheet",
+          href: appCss,
+        },
+      ],
+      scripts: [jsonLdScript(organizationJsonLd()), jsonLdScript(websiteJsonLd())],
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -69,8 +83,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
       <SiteHeader />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
         <Outlet />
       </main>
       <SiteFooter />

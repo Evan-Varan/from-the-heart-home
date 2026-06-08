@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { FormEvent, useState } from "react";
 import { z } from "zod";
+import { buildSeo } from "@/lib/seo";
 
 declare const process: {
   env: Record<string, string | undefined>;
@@ -375,22 +376,21 @@ function escapeHtml(value: string) {
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
-    meta: [
-      { title: "Book a Session — From the Heart Tutoring" },
-      {
-        name: "description",
-        content:
-          "Book your first virtual tutoring session or contact us with questions. We typically reply the same day.",
-      },
-      { property: "og:title", content: "Book a Session — From the Heart Tutoring" },
-      { property: "og:description", content: "Book your first virtual tutoring session." },
-    ],
+    ...buildSeo({
+      title: "Book an Online Tutoring Session | From the Heart Tutoring",
+      description:
+        "Book a one-on-one online tutoring session or ask a question. From the Heart Tutoring helps K-12 and college students with caring virtual support.",
+      path: "/contact",
+    }),
   }),
   component: ContactPage,
 });
 
 function ContactPage() {
   const [loading, setLoading] = useState(false);
+  const [formStatus, setFormStatus] = useState<
+    { type: "success" | "error"; message: string } | null
+  >(null);
   const submitContact = useServerFn(sendContactEmail);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -399,6 +399,7 @@ function ContactPage() {
     const formData = new FormData(form);
 
     setLoading(true);
+    setFormStatus(null);
 
     try {
       await submitContact({
@@ -413,13 +414,19 @@ function ContactPage() {
       });
 
       form.reset();
+      setFormStatus({
+        type: "success",
+        message: "Thanks! We'll be in touch within one business day. A receipt was sent to your email.",
+      });
       toast.success(
         "Thanks! We'll be in touch within one business day. A receipt was sent to your email.",
       );
     } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "We couldn't send your request. Please try again.",
-      );
+      const message =
+        error instanceof Error ? error.message : "We couldn't send your request. Please try again.";
+
+      setFormStatus({ type: "error", message });
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -485,6 +492,8 @@ function ContactPage() {
           <div className="md:col-span-3">
             <form
               onSubmit={onSubmit}
+              aria-busy={loading}
+              aria-describedby={formStatus ? "contact-form-status" : undefined}
               className="rounded-3xl border border-border bg-card p-7 shadow-sm md:p-9"
             >
               <div className="flex items-center gap-3">
@@ -537,11 +546,24 @@ function ContactPage() {
                   <Textarea
                     id="msg"
                     name="msg"
-                    className="mt-1.5 min-h-28"
+                  className="mt-1.5 min-h-28"
                     placeholder="Goals, schedule, learning style…"
                   />
                 </div>
               </div>
+              {formStatus && (
+                <p
+                  id="contact-form-status"
+                  role={formStatus.type === "error" ? "alert" : "status"}
+                  className={`mt-5 rounded-xl border px-4 py-3 text-sm ${
+                    formStatus.type === "error"
+                      ? "border-destructive/30 bg-destructive/10 text-destructive"
+                      : "border-primary/20 bg-primary/10 text-primary"
+                  }`}
+                >
+                  {formStatus.message}
+                </p>
+              )}
               <Button
                 type="submit"
                 size="lg"

@@ -22,15 +22,16 @@ import parent1 from "@/assets/parent-young-girl-mother.optimized.jpg";
 import parent2 from "@/assets/parent-young-boy-laptop-plant.optimized.jpg";
 import parent3 from "@/assets/parent-teenage-girl-orange-shirt.optimized.jpg";
 import logoMark from "@/assets/logo-mark.png";
+import { buildSeo, jsonLdScript, tutoringServiceJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "From the Heart Tutoring — Personalized Online Tutoring, Nationwide" },
-      { name: "description", content: "Caring, one-on-one virtual tutoring for K–12 and college students across the U.S. $70 per session. Book today." },
-      { property: "og:title", content: "Personalized Online Tutoring for K–12 & College" },
-      { property: "og:description", content: "Warm, one-on-one virtual tutoring across the United States. $70 per session." },
-    ],
+    ...buildSeo({
+      title: "Online Tutoring for K-12 & College Students | From the Heart Tutoring",
+      description:
+        "Caring one-on-one virtual tutoring for K-12 and college students across the U.S. Get support in math, science, English, study skills, and SAT/ACT prep.",
+    }),
+    scripts: [jsonLdScript(tutoringServiceJsonLd())],
   }),
   component: Home,
 });

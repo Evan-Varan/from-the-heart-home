@@ -9,14 +9,49 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import logoMark from "@/assets/logo-mark.png";
+import { buildSeo, faqJsonLd, jsonLdScript, tutoringServiceJsonLd } from "@/lib/seo";
+
+const pricingSeo = buildSeo({
+  title: "Tutoring Pricing & FAQ | $70 Online Tutoring Sessions",
+  description:
+    "Simple online tutoring pricing at $70 per 60-minute one-on-one virtual session. See answers about scheduling, subjects, payments, and tutor matching.",
+  path: "/pricing",
+});
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
-    meta: [
-      { title: "Pricing & FAQ — From the Heart Tutoring" },
-      { name: "description", content: "Simple, honest pricing at $70 per one-on-one virtual tutoring session. Answers to common questions from parents." },
-      { property: "og:title", content: "Pricing & FAQ — From the Heart Tutoring" },
-      { property: "og:description", content: "Simple, honest pricing at $70 per session." },
+    ...pricingSeo,
+    scripts: [
+      jsonLdScript(tutoringServiceJsonLd()),
+      jsonLdScript(
+        faqJsonLd([
+          {
+            question: "How much does a tutoring session cost?",
+            answer:
+              "Our standard rate is $70 per hour for a one-on-one virtual tutoring session, regardless of subject.",
+          },
+          {
+            question: "What subjects do you offer tutoring in?",
+            answer:
+              "We offer tutoring in math, science, English, Spanish, standardized test prep, study skills, academic coaching, and many electives.",
+          },
+          {
+            question: "How do you match students with tutors?",
+            answer:
+              "We match students with tutors based on subject expertise, grade level, learning style, personality compatibility, goals, challenges, and schedule availability.",
+          },
+          {
+            question: "How often should my child meet with a tutor?",
+            answer:
+              "Frequency depends on the student's goals and schedule. Many students meet one to two times per week for ongoing support or test preparation.",
+          },
+          {
+            question: "What is your cancellation policy?",
+            answer:
+              "Cancellations with at least 24 hours notice have no charge. Cancellations with less than 24 hours notice may be charged 50% of the session fee, and no-shows may be charged the full session fee.",
+          },
+        ]),
+      ),
     ],
   }),
   component: PricingPage,

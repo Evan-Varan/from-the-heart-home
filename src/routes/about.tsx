@@ -6,15 +6,16 @@ import { RotatingImage } from "@/components/RotatingImage";
 import tutor1 from "@/assets/tutor-teacher-coffee.optimized.jpg";
 import tutor2 from "@/assets/tutor-college-man-flannel.optimized.jpg";
 import tutor3 from "@/assets/tutor-man-blue-jacket.optimized.jpg";
+import { buildSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
-    meta: [
-      { title: "About — From the Heart Tutoring" },
-      { name: "description", content: "A small, family-run tutoring practice committed to personal attention, flexibility, and student confidence." },
-      { property: "og:title", content: "About — From the Heart Tutoring" },
-      { property: "og:description", content: "A small, family-run tutoring practice committed to personal attention." },
-    ],
+    ...buildSeo({
+      title: "About From the Heart Tutoring | Family-Run Online Tutors",
+      description:
+        "Learn about From the Heart Tutoring, a family-run online tutoring practice focused on personal attention, flexible scheduling, and student confidence.",
+      path: "/about",
+    }),
   }),
   component: AboutPage,
 });
