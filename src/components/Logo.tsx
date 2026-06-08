@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import logoFull from "@/assets/logo-full.png";
-import logoMark from "@/assets/logo-mark.png";
+import logoFull from "@/assets/logo-full-small.webp";
+import logoMark from "@/assets/logo-mark-small.webp";
 
 export function Logo({
   className = "",
@@ -19,16 +19,16 @@ export function Logo({
         <img
           src={logoMark}
           alt="From the Heart Tutoring"
-          width={790}
-          height={790}
+          width={96}
+          height={96}
           className="h-12 w-12 object-contain md:h-12 md:w-12"
         />
       ) : (
         <img
           src={logoFull}
           alt="From the Heart Tutoring"
-          width={1620}
-          height={437}
+          width={416}
+          height={112}
           className="h-14 w-auto object-contain md:h-14"
         />
       )}

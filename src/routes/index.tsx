@@ -15,13 +15,13 @@ import {
   MapPin,
 } from "@/components/icons";
 import { RotatingImage } from "@/components/RotatingImage";
-import hero1 from "@/assets/hero-boy-headphones.optimized.jpg";
-import hero2 from "@/assets/hero-girl-red-hair-laptop.optimized.jpg";
-import hero3 from "@/assets/hero-teenage-boy-laptop.optimized.jpg";
-import parent1 from "@/assets/parent-young-girl-mother.optimized.jpg";
-import parent2 from "@/assets/parent-young-boy-laptop-plant.optimized.jpg";
-import parent3 from "@/assets/parent-teenage-girl-orange-shirt.optimized.jpg";
-import logoMark from "@/assets/logo-mark.png";
+import hero1 from "@/assets/hero-boy-headphones-800.webp";
+import hero2 from "@/assets/hero-girl-red-hair-laptop-800.webp";
+import hero3 from "@/assets/hero-teenage-boy-laptop-800.webp";
+import parent1 from "@/assets/parent-young-girl-mother-760.webp";
+import parent2 from "@/assets/parent-young-boy-laptop-plant-760.webp";
+import parent3 from "@/assets/parent-teenage-girl-orange-shirt-760.webp";
+import logoMark from "@/assets/logo-mark-small.webp";
 import { buildSeo, jsonLdScript, tutoringServiceJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -61,7 +61,7 @@ function Home() {
                 <Link to="/contact">Book a Session <ArrowRight className="ml-1 h-4 w-4"/></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-full px-7">
-                <Link to="/about">Learn more</Link>
+                <Link to="/about">Learn more about From the Heart Tutoring</Link>
               </Button>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
@@ -78,6 +78,7 @@ function Home() {
                 images={[hero1, hero2, hero3]}
                 alt="Student working during a virtual tutoring session"
                 className="aspect-[4/5] w-full md:aspect-[5/6]"
+                priority
               />
             </div>
             {/* Floating cards */}
@@ -162,7 +163,7 @@ function Home() {
             />
           </div>
           <div className="order-1 md:order-2">
-            <img src={logoMark} alt="" aria-hidden width={790} height={790} className="pointer-events-none mb-4 h-8 w-8 opacity-90" />
+            <img src={logoMark} alt="" aria-hidden width={96} height={96} className="pointer-events-none mb-4 h-8 w-8 opacity-90" />
             <Eyebrow>Why parents choose us</Eyebrow>
             <h2 className="mt-4 text-3xl font-semibold leading-tight md:text-4xl">
               The opposite of a tutoring chain.
@@ -225,7 +226,7 @@ function Home() {
       {/* HOW IT WORKS */}
       <Section className="bg-secondary/40">
         <div className="relative text-center">
-          <img src={logoMark} alt="" aria-hidden width={790} height={790} className="pointer-events-none mx-auto mb-4 h-8 w-8 opacity-90" />
+          <img src={logoMark} alt="" aria-hidden width={96} height={96} className="pointer-events-none mx-auto mb-4 h-8 w-8 opacity-90" />
           <Eyebrow>How it works</Eyebrow>
           <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Three simple steps.</h2>
         </div>
@@ -236,7 +237,7 @@ function Home() {
             { icon: CalendarHeart, n: "03", t: "Schedule your sessions", d: "Pick weekly times that fit. Cancel or shift anytime." },
           ].map((s) => (
             <div key={s.n} className="relative rounded-3xl border border-border bg-card p-7 shadow-sm">
-              <span className="absolute right-6 top-6 font-display text-3xl font-semibold text-primary/15">{s.n}</span>
+              <span aria-hidden className="absolute right-6 top-6 font-display text-3xl font-semibold text-primary/40">{s.n}</span>
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <s.icon className="h-5 w-5" />
               </div>
@@ -276,7 +277,7 @@ function Home() {
               <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-blush/60 blur-3xl" aria-hidden />
               <div className="relative">
                 <div className="flex items-center gap-2 text-primary">
-                  <img src={logoMark} alt="" aria-hidden width={790} height={790} className="h-6 w-6" />
+                  <img src={logoMark} alt="" aria-hidden width={96} height={96} className="h-6 w-6" />
                   <span className="text-xs font-medium uppercase tracking-widest">Per Session</span>
                 </div>
                 <div className="mt-3 flex items-baseline gap-2">
@@ -301,7 +302,7 @@ function Home() {
       {/* TESTIMONIALS */}
       <Section className="bg-secondary/40">
         <div className="relative text-center">
-          <img src={logoMark} alt="" aria-hidden width={790} height={790} className="pointer-events-none mx-auto mb-4 h-8 w-8 opacity-90" />
+          <img src={logoMark} alt="" aria-hidden width={96} height={96} className="pointer-events-none mx-auto mb-4 h-8 w-8 opacity-90" />
           <Eyebrow>Parent stories</Eyebrow>
           <h2 className="mt-4 text-3xl font-semibold md:text-4xl">Loved by families nationwide.</h2>
         </div>

@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import logoMark from "@/assets/logo-mark.png";
+import logoMark from "@/assets/logo-mark-small.webp";
 import { buildSeo, faqJsonLd, jsonLdScript, tutoringServiceJsonLd } from "@/lib/seo";
 
 const pricingSeo = buildSeo({
@@ -288,7 +288,7 @@ function PricingPage() {
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-blush/50 blur-3xl" aria-hidden />
             <div className="relative">
               <div className="flex items-center gap-2 text-primary">
-                <img src={logoMark} alt="" aria-hidden width={790} height={790} className="h-6 w-6" />
+                <img src={logoMark} alt="" aria-hidden width={96} height={96} className="h-6 w-6" />
                 <span className="text-sm font-medium uppercase tracking-widest">Per Session</span>
               </div>
               <div className="mt-3 flex items-baseline gap-1">

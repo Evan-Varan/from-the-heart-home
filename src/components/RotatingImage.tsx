@@ -5,9 +5,10 @@ type Props = {
   alt: string;
   className?: string;
   intervalMs?: number;
+  priority?: boolean;
 };
 
-export function RotatingImage({ images, alt, className = "", intervalMs = 4500 }: Props) {
+export function RotatingImage({ images, alt, className = "", intervalMs = 4500, priority = false }: Props) {
   const [idx, setIdx] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -47,8 +48,9 @@ export function RotatingImage({ images, alt, className = "", intervalMs = 4500 }
           src={src}
           alt={i === 0 ? alt : ""}
           aria-hidden={i === idx ? undefined : true}
-          loading="eager"
+          loading={priority && i === 0 ? "eager" : "lazy"}
           decoding="async"
+          fetchPriority={priority && i === 0 ? "high" : "auto"}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out motion-reduce:transition-none ${
             i === idx ? "opacity-100" : "opacity-0"
           }`}

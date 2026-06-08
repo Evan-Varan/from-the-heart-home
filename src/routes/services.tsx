@@ -11,7 +11,7 @@ import {
   PencilRuler,
   Languages,
 } from "@/components/icons";
-import logoMark from "@/assets/logo-mark.png";
+import logoMark from "@/assets/logo-mark-small.webp";
 import { buildSeo, jsonLdScript, tutoringServiceJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/services")({
@@ -68,7 +68,7 @@ function ServicesPage() {
       <Section className="bg-secondary/40">
         <div className="grid items-center gap-8 md:grid-cols-3">
           <div className="md:col-span-2">
-            <img src={logoMark} alt="" aria-hidden width={790} height={790} className="pointer-events-none mb-4 h-8 w-8 opacity-90" />
+            <img src={logoMark} alt="" aria-hidden width={96} height={96} className="pointer-events-none mb-4 h-8 w-8 opacity-90" />
             <h2 className="text-3xl font-semibold md:text-4xl">Built for high school. Loved by every grade.</h2>
             <p className="mt-4 text-muted-foreground">
               We specialize in supporting high schoolers through the toughest stretch of their academic

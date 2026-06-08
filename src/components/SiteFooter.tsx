@@ -14,7 +14,7 @@ export function SiteFooter() {
           </p>
         </div>
         <div>
-          <h4 className="text-sm font-semibold text-foreground">Explore</h4>
+          <p className="text-sm font-semibold text-foreground">Explore</p>
           <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
             <li><Link to="/about" className="hover:text-primary">About</Link></li>
             <li><Link to="/services" className="hover:text-primary">Services</Link></li>
@@ -24,7 +24,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-semibold text-foreground">Get in touch</h4>
+          <p className="text-sm font-semibold text-foreground">Get in touch</p>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-primary"/><span>info@fromthehearttutoring.com</span></li>
             <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-primary"/><span>Text us at (512)-966-6064</span></li>
