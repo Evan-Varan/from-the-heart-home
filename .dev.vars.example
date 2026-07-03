@@ -1,0 +1,27 @@
+# Copy this file to .dev.vars and fill in values for local development.
+# .dev.vars is gitignored. Never commit real secrets.
+
+APP_ENV=development
+PUBLIC_SITE_URL=http://localhost:5173
+
+# Resend (required for contact form and portal email notifications)
+RESEND_API_KEY=re_...
+RESEND_FROM_EMAIL=From the Heart Tutoring <info@fromthehearttutoring.com>
+CONTACT_TO_EMAIL=info@fromthehearttutoring.com
+
+# Stripe (required for billing — spec 07)
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_PUBLISHABLE_KEY=pk_test_...
+
+# Twilio (required for SMS notifications — spec 09)
+TWILIO_ACCOUNT_SID=AC...
+TWILIO_AUTH_TOKEN=...
+TWILIO_FROM_PHONE=+1...
+
+# Auth (required for portal login — spec 01)
+AUTH_SECRET=generate-with-openssl-rand-base64-32
+
+# Client-exposed Vite vars (safe to expose in the browser)
+VITE_PUBLIC_SITE_URL=http://localhost:5173
+VITE_STRIPE_PUBLISHABLE_KEY=pk_test_...

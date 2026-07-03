@@ -16,8 +16,16 @@
     },
   ],
   "vars": {
-    "CONTACT_TO_EMAIL": "info@fromthehearttutoring.com",
+    "APP_ENV": "production",
+    "PUBLIC_SITE_URL": "https://fromthehearttutoring.com",
+    // Keep for contact route backward-compat
     "CONTACT_SITE_URL": "https://fromthehearttutoring.com",
+    "CONTACT_TO_EMAIL": "info@fromthehearttutoring.com",
     "RESEND_FROM_EMAIL": "From the Heart Tutoring <info@fromthehearttutoring.com>",
+    // Secrets below must be set in wrangler secret put <KEY> for production.
+    // See .dev.vars.example for local development values.
   },
+  // D1 and R2 bindings are added in spec 02 and spec 10 respectively.
+  // "d1_databases": [{ "binding": "DB", "database_name": "portal", "database_id": "" }],
+  // "r2_buckets": [{ "binding": "PORTAL_FILES", "bucket_name": "portal-files" }],
 }
