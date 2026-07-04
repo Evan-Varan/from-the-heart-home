@@ -10,6 +10,20 @@ The existing repo is already a TanStack Start/TanStack Router app deployed as a 
 
 Prepare the repo for full-stack portal development with clear runtime boundaries, environment config, server-side data access patterns, and portal module organization.
 
+## Pre-Spec Checklist
+
+- Read [Product Outline](../product-outline.md) and [Manual Actions Checklist](./manual-actions.md).
+- Confirm this repo should remain TanStack Start on Cloudflare Workers for the initial portal build.
+- Confirm no provider accounts, production secrets, or database resources are required for this foundation-only spec.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on new portal foundation files, such as `npx eslint src/portal`.
+- Confirm `.dev.vars.example` contains placeholders only, not real secrets.
+- Confirm any local tool files, such as `.claude/settings.local.json`, are ignored or left uncommitted.
+- Confirm Spec 01 manual actions are ready: auth provider decision, auth project setup, callback domains, Google OAuth if included, and auth secrets.
+
 ## Dependencies
 
 None. This is the first implementation spec.
@@ -142,4 +156,3 @@ No major UI is required in this spec beyond any temporary developer-only health 
 - Messaging
 - File uploads
 - Deployment automation
-

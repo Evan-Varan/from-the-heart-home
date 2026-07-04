@@ -8,6 +8,20 @@ The marketing site is warm and parent-friendly. The portal should keep the brand
 
 Create the authenticated portal shell, navigation, responsive layout, and reusable UI patterns needed by all portal features.
 
+## Pre-Spec Checklist
+
+- Confirm Spec 01 auth redirects and role detection exist or have stable placeholders.
+- Confirm route names from [Product Outline](../product-outline.md) are still the intended portal route map.
+- Confirm no marketing-site redesign is expected in this spec.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed portal UI files.
+- Manually inspect family, tutor, and admin portal shells at desktop and mobile widths if a dev server is available.
+- Confirm protected portal routes still enforce auth/role checks.
+- Confirm reusable UI shell components are ready for onboarding, tutor, scheduling, billing, and admin specs.
+
 ## Dependencies
 
 - Spec 00: Architecture Foundation
@@ -156,4 +170,3 @@ Attendance states:
 - Redesigning the marketing site
 - Public booking flow outside `/portal`
 - Advanced white-label theming
-

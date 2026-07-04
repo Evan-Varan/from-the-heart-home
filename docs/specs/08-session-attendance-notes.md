@@ -8,6 +8,22 @@ Tutors should log whether a session happened and write a simple parent-visible n
 
 Implement attendance tracking and session notes for completed, canceled, and no-show sessions.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 06 and 07 are complete enough for session lifecycle and billing hooks.
+- Confirm session notes remain parent-visible only, with no private tutor notes.
+- Confirm attendance states map to billing rules exactly as written.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed attendance/session-note files.
+- Verify tutors can mark attendance only for their sessions.
+- Verify families can view notes only for their own students.
+- Verify admin can view all notes and attendance states.
+- Verify attendance changes update session status and billing reason correctly.
+- Confirm Spec 09 can notify families when notes are posted.
+
 ## Dependencies
 
 - Spec 06: Scheduling And Booking Lifecycle
@@ -137,4 +153,3 @@ This log supports admin payment calculations outside the portal.
 - Advanced progress tracking
 - Grades/test score tracking
 - Tutor payout execution
-

@@ -15,6 +15,15 @@ import { Route as PortalRouteImport } from './routes/portal'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortalIndexRouteImport } from './routes/portal/index'
+import { Route as PortalTutorRouteImport } from './routes/portal/tutor'
+import { Route as PortalLogoutRouteImport } from './routes/portal/logout'
+import { Route as PortalDashboardRouteImport } from './routes/portal/dashboard'
+import { Route as PortalAdminRouteImport } from './routes/portal/admin'
+import { Route as PortalSettingsAccountRouteImport } from './routes/portal/settings/account'
+import { Route as PortalRegisterSplatRouteImport } from './routes/portal/register.$'
+import { Route as PortalLoginSplatRouteImport } from './routes/portal/login.$'
+import { Route as PortalForgotPasswordSplatRouteImport } from './routes/portal/forgot-password.$'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -46,37 +55,138 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalIndexRoute = PortalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalTutorRoute = PortalTutorRouteImport.update({
+  id: '/tutor',
+  path: '/tutor',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalLogoutRoute = PortalLogoutRouteImport.update({
+  id: '/logout',
+  path: '/logout',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalDashboardRoute = PortalDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalAdminRoute = PortalAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalSettingsAccountRoute = PortalSettingsAccountRouteImport.update({
+  id: '/settings/account',
+  path: '/settings/account',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalRegisterSplatRoute = PortalRegisterSplatRouteImport.update({
+  id: '/register/$',
+  path: '/register/$',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalLoginSplatRoute = PortalLoginSplatRouteImport.update({
+  id: '/login/$',
+  path: '/login/$',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalForgotPasswordSplatRoute =
+  PortalForgotPasswordSplatRouteImport.update({
+    id: '/forgot-password/$',
+    path: '/forgot-password/$',
+    getParentRoute: () => PortalRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/portal': typeof PortalRoute
+  '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
+  '/portal/admin': typeof PortalAdminRoute
+  '/portal/dashboard': typeof PortalDashboardRoute
+  '/portal/logout': typeof PortalLogoutRoute
+  '/portal/tutor': typeof PortalTutorRoute
+  '/portal/': typeof PortalIndexRoute
+  '/portal/forgot-password/$': typeof PortalForgotPasswordSplatRoute
+  '/portal/login/$': typeof PortalLoginSplatRoute
+  '/portal/register/$': typeof PortalRegisterSplatRoute
+  '/portal/settings/account': typeof PortalSettingsAccountRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/portal': typeof PortalRoute
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
+  '/portal/admin': typeof PortalAdminRoute
+  '/portal/dashboard': typeof PortalDashboardRoute
+  '/portal/logout': typeof PortalLogoutRoute
+  '/portal/tutor': typeof PortalTutorRoute
+  '/portal': typeof PortalIndexRoute
+  '/portal/forgot-password/$': typeof PortalForgotPasswordSplatRoute
+  '/portal/login/$': typeof PortalLoginSplatRoute
+  '/portal/register/$': typeof PortalRegisterSplatRoute
+  '/portal/settings/account': typeof PortalSettingsAccountRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/portal': typeof PortalRoute
+  '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/services': typeof ServicesRoute
+  '/portal/admin': typeof PortalAdminRoute
+  '/portal/dashboard': typeof PortalDashboardRoute
+  '/portal/logout': typeof PortalLogoutRoute
+  '/portal/tutor': typeof PortalTutorRoute
+  '/portal/': typeof PortalIndexRoute
+  '/portal/forgot-password/$': typeof PortalForgotPasswordSplatRoute
+  '/portal/login/$': typeof PortalLoginSplatRoute
+  '/portal/register/$': typeof PortalRegisterSplatRoute
+  '/portal/settings/account': typeof PortalSettingsAccountRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/portal' | '/pricing' | '/services'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/portal'
+    | '/pricing'
+    | '/services'
+    | '/portal/admin'
+    | '/portal/dashboard'
+    | '/portal/logout'
+    | '/portal/tutor'
+    | '/portal/'
+    | '/portal/forgot-password/$'
+    | '/portal/login/$'
+    | '/portal/register/$'
+    | '/portal/settings/account'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/portal' | '/pricing' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/pricing'
+    | '/services'
+    | '/portal/admin'
+    | '/portal/dashboard'
+    | '/portal/logout'
+    | '/portal/tutor'
+    | '/portal'
+    | '/portal/forgot-password/$'
+    | '/portal/login/$'
+    | '/portal/register/$'
+    | '/portal/settings/account'
   id:
     | '__root__'
     | '/'
@@ -85,13 +195,22 @@ export interface FileRouteTypes {
     | '/portal'
     | '/pricing'
     | '/services'
+    | '/portal/admin'
+    | '/portal/dashboard'
+    | '/portal/logout'
+    | '/portal/tutor'
+    | '/portal/'
+    | '/portal/forgot-password/$'
+    | '/portal/login/$'
+    | '/portal/register/$'
+    | '/portal/settings/account'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  PortalRoute: typeof PortalRoute
+  PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
   ServicesRoute: typeof ServicesRoute
 }
@@ -140,14 +259,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/': {
+      id: '/portal/'
+      path: '/'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof PortalIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/tutor': {
+      id: '/portal/tutor'
+      path: '/tutor'
+      fullPath: '/portal/tutor'
+      preLoaderRoute: typeof PortalTutorRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/logout': {
+      id: '/portal/logout'
+      path: '/logout'
+      fullPath: '/portal/logout'
+      preLoaderRoute: typeof PortalLogoutRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/dashboard': {
+      id: '/portal/dashboard'
+      path: '/dashboard'
+      fullPath: '/portal/dashboard'
+      preLoaderRoute: typeof PortalDashboardRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/admin': {
+      id: '/portal/admin'
+      path: '/admin'
+      fullPath: '/portal/admin'
+      preLoaderRoute: typeof PortalAdminRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/settings/account': {
+      id: '/portal/settings/account'
+      path: '/settings/account'
+      fullPath: '/portal/settings/account'
+      preLoaderRoute: typeof PortalSettingsAccountRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/register/$': {
+      id: '/portal/register/$'
+      path: '/register/$'
+      fullPath: '/portal/register/$'
+      preLoaderRoute: typeof PortalRegisterSplatRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/login/$': {
+      id: '/portal/login/$'
+      path: '/login/$'
+      fullPath: '/portal/login/$'
+      preLoaderRoute: typeof PortalLoginSplatRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/forgot-password/$': {
+      id: '/portal/forgot-password/$'
+      path: '/forgot-password/$'
+      fullPath: '/portal/forgot-password/$'
+      preLoaderRoute: typeof PortalForgotPasswordSplatRouteImport
+      parentRoute: typeof PortalRoute
+    }
   }
 }
+
+interface PortalRouteChildren {
+  PortalAdminRoute: typeof PortalAdminRoute
+  PortalDashboardRoute: typeof PortalDashboardRoute
+  PortalLogoutRoute: typeof PortalLogoutRoute
+  PortalTutorRoute: typeof PortalTutorRoute
+  PortalIndexRoute: typeof PortalIndexRoute
+  PortalForgotPasswordSplatRoute: typeof PortalForgotPasswordSplatRoute
+  PortalLoginSplatRoute: typeof PortalLoginSplatRoute
+  PortalRegisterSplatRoute: typeof PortalRegisterSplatRoute
+  PortalSettingsAccountRoute: typeof PortalSettingsAccountRoute
+}
+
+const PortalRouteChildren: PortalRouteChildren = {
+  PortalAdminRoute: PortalAdminRoute,
+  PortalDashboardRoute: PortalDashboardRoute,
+  PortalLogoutRoute: PortalLogoutRoute,
+  PortalTutorRoute: PortalTutorRoute,
+  PortalIndexRoute: PortalIndexRoute,
+  PortalForgotPasswordSplatRoute: PortalForgotPasswordSplatRoute,
+  PortalLoginSplatRoute: PortalLoginSplatRoute,
+  PortalRegisterSplatRoute: PortalRegisterSplatRoute,
+  PortalSettingsAccountRoute: PortalSettingsAccountRoute,
+}
+
+const PortalRouteWithChildren =
+  PortalRoute._addFileChildren(PortalRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  PortalRoute: PortalRoute,
+  PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
   ServicesRoute: ServicesRoute,
 }
@@ -156,10 +365,11 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

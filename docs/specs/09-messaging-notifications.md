@@ -8,6 +8,13 @@ Families and tutors need a general conversation channel. Admins should be able t
 
 Implement family/tutor messaging and notification events for scheduling, billing, notes, and account activity.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 01, 06, 07, and 08 expose the events that need notifications.
+- Review [Manual Actions Checklist](./manual-actions.md), especially Resend, SMS, and consent items.
+- Confirm whether SMS ships now or remains disabled behind preferences/config.
+- Confirm sender name, reply-to behavior, and support inbox.
+
 ## Manual Actions
 
 - `ACCOUNT REQUIRED`: Verify Resend sending domain/DNS if not already complete.
@@ -17,6 +24,17 @@ Implement family/tutor messaging and notification events for scheduling, billing
 - `ACCOUNT REQUIRED`: If SMS ships, configure Twilio phone number and any required messaging registration.
 - `OWNER REQUIRED`: Approve SMS opt-in/consent language before enabling SMS.
 - `SECRET REQUIRED`: Add Twilio credentials only if SMS is enabled.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed messaging/notification files.
+- Verify family/tutor conversations enforce relationship permissions.
+- Verify admins can view conversations without breaking participant permissions.
+- Verify email notification sends in development/test mode.
+- Verify SMS is skipped safely when disabled or missing credentials.
+- Confirm notification failures do not block scheduling or billing workflows.
+- Confirm Spec 10 can link files separately without message attachments.
 
 ## Dependencies
 

@@ -8,12 +8,29 @@ Families and tutors should be able to upload files such as homework, syllabi, te
 
 Implement secure file upload, storage, listing, download, and deletion/archive behavior using Cloudflare R2.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 01-03 are complete enough for permissioned file pages.
+- Review [Manual Actions Checklist](./manual-actions.md), especially R2 buckets and protected-download gate.
+- Confirm file size limit and allowed file types.
+- Confirm R2 bucket binding names for local/dev/prod.
+
 ## Manual Actions
 
 - `ACCOUNT REQUIRED`: Create Cloudflare R2 buckets for dev/staging and production or approve the implementer to create them.
 - `OWNER REQUIRED`: Confirm initial file size limit. Recommended default is 20 MB per file.
 - `OWNER REQUIRED`: Confirm allowed file types.
 - `PRODUCTION GATE`: Verify protected files cannot be downloaded publicly.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed file/R2 modules.
+- Verify upload writes metadata and R2 object.
+- Verify invalid file type/size is rejected server-side.
+- Verify authorized users can download files.
+- Verify unauthorized users cannot download files by guessing IDs or URLs.
+- Confirm Spec 11 can show file-related dashboard links if needed.
 
 ## Dependencies
 

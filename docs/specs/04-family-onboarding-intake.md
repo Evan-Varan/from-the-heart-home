@@ -8,10 +8,27 @@ Families are the primary customers. A family account may manage multiple student
 
 Implement family registration/onboarding and student intake data collection.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 01-03 are complete enough for authenticated family routes.
+- Review [Manual Actions Checklist](./manual-actions.md), especially intake wording decisions.
+- Confirm final intake fields, labels, and adult-student wording.
+- Confirm payment-method setup can be stubbed or linked to Spec 07 if billing is not implemented yet.
+
 ## Manual Actions
 
 - `OWNER REQUIRED`: Confirm final intake wording for learning challenges, accommodations, and parent notes.
 - `OWNER REQUIRED`: Confirm whether adult-student onboarding needs different copy from parent-managed onboarding.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed onboarding/student files.
+- Verify a family can create/edit at least one student profile.
+- Verify adult-student onboarding does not require parent-only language.
+- Verify tutors cannot edit student profiles.
+- Verify admins can view/edit student intake details if admin shell is available, or document the admin follow-up.
+- Confirm Spec 05 has enough student/subject data to connect tutor profiles and availability.
 
 ## Dependencies
 

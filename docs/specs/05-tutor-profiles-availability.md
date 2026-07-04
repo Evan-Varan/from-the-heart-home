@@ -8,12 +8,29 @@ Families should be able to compare tutors after signup/payment setup. Tutors sho
 
 Implement tutor profiles, tutor onboarding/admin approval, and weekly availability blocks.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 01-03 are complete enough for tutor/admin routes.
+- Review [Manual Actions Checklist](./manual-actions.md), especially initial tutor data requirements.
+- Confirm initial tutor profile data, meeting links, subjects, grade ranges, and approval owner.
+- Confirm whether tutor pay reporting fields should be visible/populated now.
+
 ## Manual Actions
 
 - `OWNER REQUIRED`: Provide initial tutor names, bios, subjects, grade ranges, contact details, and profile photos if available.
 - `OWNER REQUIRED`: Provide or confirm each tutor's Zoom/Google Meet link.
 - `OWNER REQUIRED`: Confirm who internally can approve tutors.
 - `OWNER REQUIRED`: Confirm whether tutor pay reporting rates should be populated during initial setup.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed tutor/availability files.
+- Verify tutors can edit their own profile and availability only.
+- Verify admins can approve/activate tutors.
+- Verify inactive/pending tutors are not visible for family booking.
+- Verify overlapping availability blocks are rejected.
+- Confirm Spec 06 can generate bookable slots from availability blocks.
 
 ## Dependencies
 

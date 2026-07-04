@@ -8,6 +8,23 @@ Admins run the tutoring business. They need full operational control over famili
 
 Implement admin workflows that make the portal usable as a TutorBird replacement.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 04-11 are complete enough for admin management of core entities.
+- Confirm admin role checks are enforced server-side.
+- Confirm admin invoice line-item edits remain out of scope.
+- Confirm edge-case behavior for blocked billing, late cancellation, and session edits after invoice generation.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed admin files.
+- Verify non-admin users cannot access admin routes or server actions.
+- Verify admin can manage families, students, tutors, booking requests, sessions, invoices, messages, reports, and settings.
+- Verify admin actions create audit events.
+- Verify admin-created/edited sessions still use conflict and billing rules.
+- Confirm Spec 13 production checklist can be completed with admin setup available.
+
 ## Dependencies
 
 - Spec 04: Family Onboarding And Intake
@@ -166,4 +183,3 @@ When edge cases affect billing, use existing billing rules and surface warnings.
 - Admin impersonation
 - Bulk CSV import/export
 - Complex staff permission levels
-

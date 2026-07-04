@@ -8,6 +8,24 @@ Scheduling is the central problem the portal is meant to solve. Current scheduli
 
 Implement one-time and recurring session booking, booking approvals, conflict prevention, cancellation, rescheduling, and session lifecycle rules.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 02, 04, and 05 are complete enough for students, subjects, tutors, and availability.
+- Confirm booking requires saved payment method, or use a temporary payment-ready flag until Spec 07 is complete.
+- Confirm cancellation billing copy matches the current policy.
+- Confirm same-day booking and double-booking rules are understood before implementation.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed scheduling/session files.
+- Verify one-time booking request creation.
+- Verify recurring weekly booking creates actual future session records.
+- Verify tutor/admin approval and decline flows.
+- Verify double-booking is blocked for tutor and student.
+- Verify family cancellation displays the billing consequence before confirmation.
+- Confirm Spec 07 can invoice from scheduled sessions and session status data.
+
 ## Dependencies
 
 - Spec 02: Database Schema
@@ -186,4 +204,3 @@ Block if:
 - Group sessions
 - Package/session-credit scheduling
 - Complex waitlists
-

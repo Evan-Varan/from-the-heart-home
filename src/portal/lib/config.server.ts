@@ -36,8 +36,9 @@ export function getServerConfig() {
       fromPhone: env("TWILIO_FROM_PHONE"),
     },
 
-    auth: {
-      secret: env("AUTH_SECRET"),
+    clerk: {
+      secretKey: env("CLERK_SECRET_KEY"),
+      publishableKey: env("CLERK_PUBLISHABLE_KEY"),
     },
   };
 }

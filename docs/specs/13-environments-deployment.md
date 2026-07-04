@@ -8,6 +8,13 @@ The current site is deployed cheaply on Cloudflare. The portal should preserve a
 
 Define local, dev/staging, and production environments with Cloudflare deployment and simple GitHub Actions automation.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 00-12 are complete or explicitly decide which incomplete features are not part of first deployment.
+- Review [Manual Actions Checklist](./manual-actions.md), especially production gates.
+- Confirm Cloudflare access, domain/zone access, environment names, and deployment trigger strategy.
+- Confirm all provider accounts and secrets exist for the target environment.
+
 ## Manual Actions
 
 - `ACCOUNT REQUIRED`: Confirm Cloudflare account access and production zone access.
@@ -16,6 +23,16 @@ Define local, dev/staging, and production environments with Cloudflare deploymen
 - `OWNER REQUIRED`: Confirm deployment trigger strategy. Manual production deploy is recommended initially.
 - `PRODUCTION GATE`: Verify auth, database, R2, Stripe, Resend, and optional Twilio all point at production resources before first real users.
 - `PRODUCTION GATE`: Create the first production admin user.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Verify local environment starts with documented commands.
+- Verify dev/staging deployment uses non-production database, storage, Stripe, Resend, Twilio, and auth resources.
+- Verify production deployment uses production resources only after explicit approval.
+- Verify secrets are stored in Cloudflare/GitHub secret storage and are not committed.
+- Verify first production admin can log in.
+- Verify core smoke test: login, portal load, payment setup in correct mode, booking request, notification send, and protected file behavior if files are enabled.
 
 ## Dependencies
 

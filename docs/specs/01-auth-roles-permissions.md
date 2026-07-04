@@ -10,6 +10,14 @@ Families must be authenticated before viewing tutor availability or booking sess
 
 Implement authentication, account identity, role assignment, and permission checks for all portal areas.
 
+## Pre-Spec Checklist
+
+- Confirm Spec 00 is complete and `npm run build` passes.
+- Review [Manual Actions Checklist](./manual-actions.md), especially the auth section.
+- Confirm the auth provider and whether Google SSO ships now or later.
+- Confirm local, dev/staging, and production callback/allowed domains are known.
+- Confirm required auth secrets/API keys are available through local/provider configuration, not committed files.
+
 ## Manual Actions
 
 - `OWNER REQUIRED`: Confirm the auth provider before implementation. Recommended default is Clerk if it works cleanly with Cloudflare/TanStack Start.
@@ -17,6 +25,16 @@ Implement authentication, account identity, role assignment, and permission chec
 - `ACCOUNT REQUIRED`: Configure local, dev/staging, and production callback/allowed domains.
 - `ACCOUNT REQUIRED`: Configure Google OAuth if Google sign-in is included immediately.
 - `SECRET REQUIRED`: Store auth secrets/API keys outside the repo for each environment.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed auth/portal files.
+- Run the full Spec 01 QA plan in [docs/qa/spec-01-auth-roles-permissions-qa.md](../qa/spec-01-auth-roles-permissions-qa.md).
+- Verify unauthenticated users cannot access protected portal routes.
+- Verify family, tutor, and admin test users land on the correct dashboard or placeholder route.
+- Verify no auth secret, OAuth client secret, or provider private key was committed.
+- Confirm Spec 02 manual actions are ready: D1 database creation/approval and seed-user decision.
 
 ## Dependencies
 
@@ -59,29 +77,29 @@ Future roles may be added later, but do not build a complex custom RBAC editor i
 
 ## Permission Matrix
 
-| Capability | Family | Tutor | Admin |
-| --- | --- | --- | --- |
-| View own dashboard | Yes | Yes | Yes |
-| Manage own profile | Yes | Yes | Yes |
-| Manage notification preferences | Yes | Yes | Yes |
-| Manage family students | Yes, own account | No | Yes |
-| Edit student core profile | Own students | No | Yes |
-| View student accommodations/notes | Own students | Assigned/relevant students | Yes |
-| View tutor profiles | After signup/payment setup | No | Yes |
-| Manage tutor profile | No | Own profile | Yes |
-| Manage tutor availability | No | Own availability | Yes |
-| Request sessions | Yes | Yes, for own calendar if needed | Yes |
-| Approve booking requests | No | Own requests | Yes |
-| Reschedule confirmed sessions | Yes for own sessions | Yes for own sessions | Yes |
-| Cancel confirmed sessions | Yes for own sessions | Yes for own sessions | Yes |
-| View invoices/payment status | Own account | Relevant session payment status only | Yes |
-| Manage payment methods | Own account | No | View only unless later expanded |
-| Mark attendance | No | Own sessions | Yes |
-| Write session notes | No | Own sessions | Yes |
-| View session notes | Own students | Own sessions | Yes |
-| Message users | Own tutor/family conversations | Own family conversations | All |
-| Upload files | Own account/student context | Relevant sessions/students | Yes |
-| View reports | No | Own session log | Yes |
+| Capability                        | Family                         | Tutor                                | Admin                           |
+| --------------------------------- | ------------------------------ | ------------------------------------ | ------------------------------- |
+| View own dashboard                | Yes                            | Yes                                  | Yes                             |
+| Manage own profile                | Yes                            | Yes                                  | Yes                             |
+| Manage notification preferences   | Yes                            | Yes                                  | Yes                             |
+| Manage family students            | Yes, own account               | No                                   | Yes                             |
+| Edit student core profile         | Own students                   | No                                   | Yes                             |
+| View student accommodations/notes | Own students                   | Assigned/relevant students           | Yes                             |
+| View tutor profiles               | After signup/payment setup     | No                                   | Yes                             |
+| Manage tutor profile              | No                             | Own profile                          | Yes                             |
+| Manage tutor availability         | No                             | Own availability                     | Yes                             |
+| Request sessions                  | Yes                            | Yes, for own calendar if needed      | Yes                             |
+| Approve booking requests          | No                             | Own requests                         | Yes                             |
+| Reschedule confirmed sessions     | Yes for own sessions           | Yes for own sessions                 | Yes                             |
+| Cancel confirmed sessions         | Yes for own sessions           | Yes for own sessions                 | Yes                             |
+| View invoices/payment status      | Own account                    | Relevant session payment status only | Yes                             |
+| Manage payment methods            | Own account                    | No                                   | View only unless later expanded |
+| Mark attendance                   | No                             | Own sessions                         | Yes                             |
+| Write session notes               | No                             | Own sessions                         | Yes                             |
+| View session notes                | Own students                   | Own sessions                         | Yes                             |
+| Message users                     | Own tutor/family conversations | Own family conversations             | All                             |
+| Upload files                      | Own account/student context    | Relevant sessions/students           | Yes                             |
+| View reports                      | No                             | Own session log                      | Yes                             |
 
 ## Routes
 

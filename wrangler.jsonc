@@ -22,7 +22,12 @@
     "CONTACT_SITE_URL": "https://fromthehearttutoring.com",
     "CONTACT_TO_EMAIL": "info@fromthehearttutoring.com",
     "RESEND_FROM_EMAIL": "From the Heart Tutoring <info@fromthehearttutoring.com>",
-    // Secrets below must be set in wrangler secret put <KEY> for production.
+    // Clerk auth (set sign-in/sign-up URL so Clerk redirects to the correct portal pages)
+    "CLERK_SIGN_IN_URL": "/portal/login",
+    "CLERK_SIGN_UP_URL": "/portal/register",
+    // CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY must be set via:
+    //   wrangler secret put CLERK_SECRET_KEY
+    //   wrangler secret put CLERK_PUBLISHABLE_KEY
     // See .dev.vars.example for local development values.
   },
   // D1 and R2 bindings are added in spec 02 and spec 10 respectively.

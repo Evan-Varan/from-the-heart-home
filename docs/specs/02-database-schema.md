@@ -8,11 +8,27 @@ The portal manages operational data for a tutoring business: families, students,
 
 Create the initial Cloudflare D1 relational schema and migrations needed by the portal.
 
+## Pre-Spec Checklist
+
+- Confirm Spec 01 auth user mapping and local role model are available.
+- Review [Manual Actions Checklist](./manual-actions.md), especially D1 and production migration gates.
+- Confirm D1 database names/bindings for local/dev/prod or get approval to create them.
+- Confirm whether seed data should use real owner/tutor emails or test-only records.
+
 ## Manual Actions
 
 - `ACCOUNT REQUIRED`: Create Cloudflare D1 databases for local/dev/prod or approve the implementer to create them with Wrangler.
 - `OWNER REQUIRED`: Confirm whether seed users should use real admin/tutor emails or test-only emails.
 - `PRODUCTION GATE`: Review production migrations before applying them.
+
+## Post-Spec Checklist
+
+- Run local migrations from a clean database.
+- Run seed command, if added.
+- Run `npm run build`.
+- Run targeted lint on database/schema modules.
+- Confirm production migrations have not been applied unless explicitly approved.
+- Confirm Spec 03 can use the new user/role/session types without schema ambiguity.
 
 ## Dependencies
 

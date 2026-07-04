@@ -8,6 +8,22 @@ The portal should include personalized dashboards for families, tutors, and admi
 
 Implement role-specific dashboards and practical reports for sessions, invoices, tutor logs, unpaid balances, and operational alerts.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 06-10 are complete enough to provide real session, invoice, message, note, and file data.
+- Confirm which dashboard metrics are required for first production release.
+- Confirm CSV export remains deferred.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed dashboard/reporting files.
+- Verify family dashboard only shows own account data.
+- Verify tutor dashboard only shows own/relevant session data.
+- Verify admin dashboard aggregates across the business.
+- Verify reports use date filters correctly.
+- Confirm Spec 12 can reuse dashboard/reporting services for admin operations.
+
 ## Dependencies
 
 - Spec 06: Scheduling And Booking Lifecycle
@@ -143,4 +159,3 @@ Family metrics:
 - Forecasting
 - Data warehouse
 - Complex charting unless already useful from existing chart components
-

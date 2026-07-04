@@ -5,6 +5,7 @@ export function getPublicConfig() {
   return {
     siteUrl: import.meta.env.VITE_PUBLIC_SITE_URL ?? "https://fromthehearttutoring.com",
     stripePublishableKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY as string | undefined,
+    clerkPublishableKey: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string | undefined,
   };
 }
 

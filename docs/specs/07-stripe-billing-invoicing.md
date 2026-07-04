@@ -8,6 +8,13 @@ From the Heart Tutoring charges per session. Default pricing is $70/hour, but pr
 
 Implement Stripe customer setup, saved payment methods, autopay, automatic invoice generation from scheduled sessions, payment status tracking, and booking blocks for unpaid balances.
 
+## Pre-Spec Checklist
+
+- Confirm Specs 02, 04, and 06 are complete enough for family accounts, sessions, and billing settings.
+- Review [Manual Actions Checklist](./manual-actions.md), especially Stripe account, secrets, and production gates.
+- Confirm invoice grouping default, enabled payment methods, and ACH preference.
+- Confirm Stripe test keys and webhook secret are available outside committed files.
+
 ## Manual Actions
 
 - `ACCOUNT REQUIRED`: Create or access the Stripe account.
@@ -17,6 +24,18 @@ Implement Stripe customer setup, saved payment methods, autopay, automatic invoi
 - `OWNER REQUIRED`: Confirm whether ACH should be presented as the preferred lower-fee option.
 - `SECRET REQUIRED`: Add Stripe publishable key, secret key, and webhook secret for each environment.
 - `PRODUCTION GATE`: Complete test-mode payment setup, invoice, autopay, failed payment, and webhook tests before live billing.
+
+## Post-Spec Checklist
+
+- Run `npm run build`.
+- Run targeted lint on changed billing/Stripe files.
+- Verify Stripe test-mode customer and payment method setup.
+- Verify automatic invoice generation from scheduled sessions.
+- Verify late cancellation and no-show billing calculations.
+- Verify webhook handling is idempotent.
+- Verify booking is blocked when payment method/balance rules require it.
+- Confirm no live Stripe keys were committed.
+- Confirm Spec 08 can use billing/attendance hooks without manual invoice edits.
 
 ## Dependencies
 
