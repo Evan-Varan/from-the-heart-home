@@ -1,6 +1,4 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { ClerkProvider } from "@clerk/tanstack-react-start";
-import { shadcn } from "@clerk/ui/themes";
 
 import appCss from "../styles.css?url";
 import { SiteHeader } from "../components/SiteHeader";
@@ -109,20 +107,18 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <ClerkProvider appearance={{ theme: shadcn }}>
-      <div className="flex min-h-screen flex-col bg-background">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:shadow-lg"
-        >
-          Skip to main content
-        </a>
-        <SiteHeader />
-        <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
-          <Outlet />
-        </main>
-        <SiteFooter />
-      </div>
-    </ClerkProvider>
+    <div className="flex min-h-screen flex-col bg-background">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+      <SiteHeader />
+      <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+        <Outlet />
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

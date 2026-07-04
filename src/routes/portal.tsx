@@ -1,4 +1,6 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { ClerkProvider } from "@clerk/tanstack-react-start";
+import { shadcn } from "@clerk/ui/themes";
 import { buildSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/portal")({
@@ -15,5 +17,9 @@ export const Route = createFileRoute("/portal")({
 });
 
 function PortalLayout() {
-  return <Outlet />;
+  return (
+    <ClerkProvider appearance={{ theme: shadcn }}>
+      <Outlet />
+    </ClerkProvider>
+  );
 }
