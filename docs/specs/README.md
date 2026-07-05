@@ -22,6 +22,7 @@ Manual owner/vendor steps are tracked in [Manual Actions Checklist](./manual-act
 12. [11 - Dashboards And Reporting](./11-dashboards-reporting.md)
 13. [12 - Admin Operations](./12-admin-operations.md)
 14. [13 - Environments And Deployment](./13-environments-deployment.md)
+15. [14 - Deferred Enhancements](./14-deferred-enhancements.md) — Google SSO, JWT template, Apple Sign-In, TutorBird migration
 
 ## Global Product Context
 

@@ -1,5 +1,10 @@
 # Copy this file to .dev.vars and fill in values for local development.
 # .dev.vars is gitignored. Never commit real secrets.
+#
+# NOTE: Cloudflare D1 is accessed via the "DB" Workers binding — no connection
+# string or env var is needed. The binding is declared in wrangler.jsonc under
+# d1_databases. For local dev, wrangler automatically provides it when you run
+# "npm run dev" after applying migrations with "npm run db:migrate:local".
 
 APP_ENV=development
 PUBLIC_SITE_URL=http://localhost:5173

@@ -30,7 +30,17 @@
     //   wrangler secret put CLERK_PUBLISHABLE_KEY
     // See .dev.vars.example for local development values.
   },
-  // D1 and R2 bindings are added in spec 02 and spec 10 respectively.
-  // "d1_databases": [{ "binding": "DB", "database_name": "portal", "database_id": "" }],
+  // R2 binding added in spec 10.
   // "r2_buckets": [{ "binding": "PORTAL_FILES", "bucket_name": "portal-files" }],
+
+  // D1 binding — spec 02.
+  // Replace "PLACEHOLDER" with the real database_id after running:
+  //   wrangler d1 create portal
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portal",
+      "database_id": "7141a90b-b575-40e1-a977-0bb56a50cdab",
+    },
+  ],
 }
