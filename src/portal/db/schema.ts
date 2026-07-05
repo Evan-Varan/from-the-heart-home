@@ -4,6 +4,7 @@
 // UUIDs → crypto.randomUUID() (available in Workers runtime).
 
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { relations } from "drizzle-orm";
 
 // ---------------------------------------------------------------------------
 // users
@@ -504,6 +505,44 @@ export const audit_events = sqliteTable("audit_events", {
   // Unix timestamp
   created_at: integer("created_at").notNull(),
 });
+
+// ---------------------------------------------------------------------------
+// Relations (required for db.query.*.findMany({ with: {...} }))
+// ---------------------------------------------------------------------------
+export const studentsRelations = relations(students, ({ many }) => ({
+  student_subjects: many(student_subjects),
+}));
+
+export const studentSubjectsRelations = relations(student_subjects, ({ one }) => ({
+  student: one(students, {
+    fields: [student_subjects.student_id],
+    references: [students.id],
+  }),
+  subject: one(subjects, {
+    fields: [student_subjects.subject_id],
+    references: [subjects.id],
+  }),
+}));
+
+export const subjectsRelations = relations(subjects, ({ many }) => ({
+  student_subjects: many(student_subjects),
+  tutor_subjects: many(tutor_subjects),
+}));
+
+export const tutorsRelations = relations(tutors, ({ many }) => ({
+  tutor_subjects: many(tutor_subjects),
+}));
+
+export const tutorSubjectsRelations = relations(tutor_subjects, ({ one }) => ({
+  tutor: one(tutors, {
+    fields: [tutor_subjects.tutor_id],
+    references: [tutors.id],
+  }),
+  subject: one(subjects, {
+    fields: [tutor_subjects.subject_id],
+    references: [subjects.id],
+  }),
+}));
 
 // ---------------------------------------------------------------------------
 // system_settings

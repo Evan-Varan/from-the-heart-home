@@ -20,8 +20,13 @@ import { Route as PortalTutorRouteImport } from './routes/portal/tutor'
 import { Route as PortalLogoutRouteImport } from './routes/portal/logout'
 import { Route as PortalDashboardRouteImport } from './routes/portal/dashboard'
 import { Route as PortalAdminRouteImport } from './routes/portal/admin'
+import { Route as PortalStudentsIndexRouteImport } from './routes/portal/students/index'
+import { Route as PortalOnboardingIndexRouteImport } from './routes/portal/onboarding/index'
+import { Route as PortalStudentsStudentIdRouteImport } from './routes/portal/students/$studentId'
 import { Route as PortalSettingsAccountRouteImport } from './routes/portal/settings/account'
 import { Route as PortalRegisterSplatRouteImport } from './routes/portal/register.$'
+import { Route as PortalOnboardingStudentRouteImport } from './routes/portal/onboarding/student'
+import { Route as PortalOnboardingPaymentRouteImport } from './routes/portal/onboarding/payment'
 import { Route as PortalLoginSplatRouteImport } from './routes/portal/login.$'
 import { Route as PortalForgotPasswordSplatRouteImport } from './routes/portal/forgot-password.$'
 
@@ -80,6 +85,21 @@ const PortalAdminRoute = PortalAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => PortalRoute,
 } as any)
+const PortalStudentsIndexRoute = PortalStudentsIndexRouteImport.update({
+  id: '/students/',
+  path: '/students/',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalOnboardingIndexRoute = PortalOnboardingIndexRouteImport.update({
+  id: '/onboarding/',
+  path: '/onboarding/',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalStudentsStudentIdRoute = PortalStudentsStudentIdRouteImport.update({
+  id: '/students/$studentId',
+  path: '/students/$studentId',
+  getParentRoute: () => PortalRoute,
+} as any)
 const PortalSettingsAccountRoute = PortalSettingsAccountRouteImport.update({
   id: '/settings/account',
   path: '/settings/account',
@@ -88,6 +108,16 @@ const PortalSettingsAccountRoute = PortalSettingsAccountRouteImport.update({
 const PortalRegisterSplatRoute = PortalRegisterSplatRouteImport.update({
   id: '/register/$',
   path: '/register/$',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalOnboardingStudentRoute = PortalOnboardingStudentRouteImport.update({
+  id: '/onboarding/student',
+  path: '/onboarding/student',
+  getParentRoute: () => PortalRoute,
+} as any)
+const PortalOnboardingPaymentRoute = PortalOnboardingPaymentRouteImport.update({
+  id: '/onboarding/payment',
+  path: '/onboarding/payment',
   getParentRoute: () => PortalRoute,
 } as any)
 const PortalLoginSplatRoute = PortalLoginSplatRouteImport.update({
@@ -116,8 +146,13 @@ export interface FileRoutesByFullPath {
   '/portal/': typeof PortalIndexRoute
   '/portal/forgot-password/$': typeof PortalForgotPasswordSplatRoute
   '/portal/login/$': typeof PortalLoginSplatRoute
+  '/portal/onboarding/payment': typeof PortalOnboardingPaymentRoute
+  '/portal/onboarding/student': typeof PortalOnboardingStudentRoute
   '/portal/register/$': typeof PortalRegisterSplatRoute
   '/portal/settings/account': typeof PortalSettingsAccountRoute
+  '/portal/students/$studentId': typeof PortalStudentsStudentIdRoute
+  '/portal/onboarding/': typeof PortalOnboardingIndexRoute
+  '/portal/students/': typeof PortalStudentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -132,8 +167,13 @@ export interface FileRoutesByTo {
   '/portal': typeof PortalIndexRoute
   '/portal/forgot-password/$': typeof PortalForgotPasswordSplatRoute
   '/portal/login/$': typeof PortalLoginSplatRoute
+  '/portal/onboarding/payment': typeof PortalOnboardingPaymentRoute
+  '/portal/onboarding/student': typeof PortalOnboardingStudentRoute
   '/portal/register/$': typeof PortalRegisterSplatRoute
   '/portal/settings/account': typeof PortalSettingsAccountRoute
+  '/portal/students/$studentId': typeof PortalStudentsStudentIdRoute
+  '/portal/onboarding': typeof PortalOnboardingIndexRoute
+  '/portal/students': typeof PortalStudentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -150,8 +190,13 @@ export interface FileRoutesById {
   '/portal/': typeof PortalIndexRoute
   '/portal/forgot-password/$': typeof PortalForgotPasswordSplatRoute
   '/portal/login/$': typeof PortalLoginSplatRoute
+  '/portal/onboarding/payment': typeof PortalOnboardingPaymentRoute
+  '/portal/onboarding/student': typeof PortalOnboardingStudentRoute
   '/portal/register/$': typeof PortalRegisterSplatRoute
   '/portal/settings/account': typeof PortalSettingsAccountRoute
+  '/portal/students/$studentId': typeof PortalStudentsStudentIdRoute
+  '/portal/onboarding/': typeof PortalOnboardingIndexRoute
+  '/portal/students/': typeof PortalStudentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -169,8 +214,13 @@ export interface FileRouteTypes {
     | '/portal/'
     | '/portal/forgot-password/$'
     | '/portal/login/$'
+    | '/portal/onboarding/payment'
+    | '/portal/onboarding/student'
     | '/portal/register/$'
     | '/portal/settings/account'
+    | '/portal/students/$studentId'
+    | '/portal/onboarding/'
+    | '/portal/students/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -185,8 +235,13 @@ export interface FileRouteTypes {
     | '/portal'
     | '/portal/forgot-password/$'
     | '/portal/login/$'
+    | '/portal/onboarding/payment'
+    | '/portal/onboarding/student'
     | '/portal/register/$'
     | '/portal/settings/account'
+    | '/portal/students/$studentId'
+    | '/portal/onboarding'
+    | '/portal/students'
   id:
     | '__root__'
     | '/'
@@ -202,8 +257,13 @@ export interface FileRouteTypes {
     | '/portal/'
     | '/portal/forgot-password/$'
     | '/portal/login/$'
+    | '/portal/onboarding/payment'
+    | '/portal/onboarding/student'
     | '/portal/register/$'
     | '/portal/settings/account'
+    | '/portal/students/$studentId'
+    | '/portal/onboarding/'
+    | '/portal/students/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -294,6 +354,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalAdminRouteImport
       parentRoute: typeof PortalRoute
     }
+    '/portal/students/': {
+      id: '/portal/students/'
+      path: '/students'
+      fullPath: '/portal/students/'
+      preLoaderRoute: typeof PortalStudentsIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/onboarding/': {
+      id: '/portal/onboarding/'
+      path: '/onboarding'
+      fullPath: '/portal/onboarding/'
+      preLoaderRoute: typeof PortalOnboardingIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/students/$studentId': {
+      id: '/portal/students/$studentId'
+      path: '/students/$studentId'
+      fullPath: '/portal/students/$studentId'
+      preLoaderRoute: typeof PortalStudentsStudentIdRouteImport
+      parentRoute: typeof PortalRoute
+    }
     '/portal/settings/account': {
       id: '/portal/settings/account'
       path: '/settings/account'
@@ -306,6 +387,20 @@ declare module '@tanstack/react-router' {
       path: '/register/$'
       fullPath: '/portal/register/$'
       preLoaderRoute: typeof PortalRegisterSplatRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/onboarding/student': {
+      id: '/portal/onboarding/student'
+      path: '/onboarding/student'
+      fullPath: '/portal/onboarding/student'
+      preLoaderRoute: typeof PortalOnboardingStudentRouteImport
+      parentRoute: typeof PortalRoute
+    }
+    '/portal/onboarding/payment': {
+      id: '/portal/onboarding/payment'
+      path: '/onboarding/payment'
+      fullPath: '/portal/onboarding/payment'
+      preLoaderRoute: typeof PortalOnboardingPaymentRouteImport
       parentRoute: typeof PortalRoute
     }
     '/portal/login/$': {
@@ -333,8 +428,13 @@ interface PortalRouteChildren {
   PortalIndexRoute: typeof PortalIndexRoute
   PortalForgotPasswordSplatRoute: typeof PortalForgotPasswordSplatRoute
   PortalLoginSplatRoute: typeof PortalLoginSplatRoute
+  PortalOnboardingPaymentRoute: typeof PortalOnboardingPaymentRoute
+  PortalOnboardingStudentRoute: typeof PortalOnboardingStudentRoute
   PortalRegisterSplatRoute: typeof PortalRegisterSplatRoute
   PortalSettingsAccountRoute: typeof PortalSettingsAccountRoute
+  PortalStudentsStudentIdRoute: typeof PortalStudentsStudentIdRoute
+  PortalOnboardingIndexRoute: typeof PortalOnboardingIndexRoute
+  PortalStudentsIndexRoute: typeof PortalStudentsIndexRoute
 }
 
 const PortalRouteChildren: PortalRouteChildren = {
@@ -345,8 +445,13 @@ const PortalRouteChildren: PortalRouteChildren = {
   PortalIndexRoute: PortalIndexRoute,
   PortalForgotPasswordSplatRoute: PortalForgotPasswordSplatRoute,
   PortalLoginSplatRoute: PortalLoginSplatRoute,
+  PortalOnboardingPaymentRoute: PortalOnboardingPaymentRoute,
+  PortalOnboardingStudentRoute: PortalOnboardingStudentRoute,
   PortalRegisterSplatRoute: PortalRegisterSplatRoute,
   PortalSettingsAccountRoute: PortalSettingsAccountRoute,
+  PortalStudentsStudentIdRoute: PortalStudentsStudentIdRoute,
+  PortalOnboardingIndexRoute: PortalOnboardingIndexRoute,
+  PortalStudentsIndexRoute: PortalStudentsIndexRoute,
 }
 
 const PortalRouteWithChildren =
