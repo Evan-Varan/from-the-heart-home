@@ -19,7 +19,9 @@ export const Route = createFileRoute("/portal")({
 function PortalLayout() {
   return (
     <ClerkProvider appearance={{ theme: shadcn }}>
-      <Outlet />
+      <div className="fixed inset-0 z-40 overflow-auto bg-background">
+        <Outlet />
+      </div>
     </ClerkProvider>
   );
 }

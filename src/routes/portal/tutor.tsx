@@ -1,5 +1,10 @@
-import { createFileRoute, redirect, Link } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { getPortalAuthState } from "@/portal/auth/server";
+import { PortalShell } from "@/portal/components/PortalShell";
+import { PageHeader } from "@/portal/components/PageHeader";
+import { EmptyState } from "@/portal/components/EmptyState";
+import { Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/portal/tutor")({
   beforeLoad: async () => {
@@ -12,25 +17,23 @@ export const Route = createFileRoute("/portal/tutor")({
 
 function TutorDashboard() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-2xl font-semibold">Tutor Dashboard</h1>
-      <p className="mt-2 text-muted-foreground">
-        Your upcoming sessions, student notes, and availability will appear here.
-      </p>
-      <div className="mt-8 flex gap-4">
-        <Link
-          to="/portal/settings/account"
-          className="text-sm text-primary underline-offset-4 hover:underline"
-        >
-          Account settings
-        </Link>
-        <Link
-          to="/portal/logout"
-          className="text-sm text-muted-foreground underline-offset-4 hover:underline"
-        >
-          Sign out
-        </Link>
+    <PortalShell pageTitle="Dashboard">
+      <div className="mx-auto max-w-5xl space-y-6">
+        <PageHeader
+          title="Dashboard"
+          description="Your upcoming sessions, students, and schedule."
+          actions={
+            <Button variant="outline" size="sm" asChild>
+              <a href="/portal/tutor/availability">Manage availability</a>
+            </Button>
+          }
+        />
+        <EmptyState
+          icon={<Clock className="h-6 w-6" />}
+          title="No upcoming sessions"
+          description="Confirmed sessions will appear here once families book with you."
+        />
       </div>
-    </div>
+    </PortalShell>
   );
 }

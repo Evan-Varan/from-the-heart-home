@@ -1,5 +1,10 @@
-import { createFileRoute, redirect, Link } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { getPortalAuthState } from "@/portal/auth/server";
+import { PortalShell } from "@/portal/components/PortalShell";
+import { PageHeader } from "@/portal/components/PageHeader";
+import { EmptyState } from "@/portal/components/EmptyState";
+import { Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/portal/dashboard")({
   beforeLoad: async () => {
@@ -12,25 +17,28 @@ export const Route = createFileRoute("/portal/dashboard")({
 
 function FamilyDashboard() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-2xl font-semibold">Family Dashboard</h1>
-      <p className="mt-2 text-muted-foreground">
-        Your session schedule, tutor notes, and account details will appear here.
-      </p>
-      <div className="mt-8 flex gap-4">
-        <Link
-          to="/portal/settings/account"
-          className="text-sm text-primary underline-offset-4 hover:underline"
-        >
-          Account settings
-        </Link>
-        <Link
-          to="/portal/logout"
-          className="text-sm text-muted-foreground underline-offset-4 hover:underline"
-        >
-          Sign out
-        </Link>
+    <PortalShell pageTitle="Dashboard">
+      <div className="mx-auto max-w-5xl space-y-6">
+        <PageHeader
+          title="Dashboard"
+          description="Your upcoming sessions and account overview."
+          actions={
+            <Button size="sm" asChild>
+              <a href="/portal/schedule">Schedule a session</a>
+            </Button>
+          }
+        />
+        <EmptyState
+          icon={<Calendar className="h-6 w-6" />}
+          title="No upcoming sessions"
+          description="Once you schedule sessions with a tutor, they'll appear here."
+          action={
+            <Button asChild>
+              <a href="/portal/schedule">Book a session</a>
+            </Button>
+          }
+        />
       </div>
-    </div>
+    </PortalShell>
   );
 }
