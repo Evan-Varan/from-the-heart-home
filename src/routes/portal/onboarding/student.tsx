@@ -37,8 +37,9 @@ const GRADE_LEVELS = [
 
 export const Route = createFileRoute("/portal/onboarding/student")({
   beforeLoad: async () => {
-    const { userId } = await getPortalAuthState();
+    const { userId, role } = await getPortalAuthState();
     if (!userId) throw redirect({ to: "/portal/login" });
+    if (role === "tutor" || role === "admin") throw redirect({ to: "/portal" });
     const account = await getFamilyAccount();
     if (!account) throw redirect({ to: "/portal/onboarding/" });
     if (account.onboarding_status === "ready") throw redirect({ to: "/portal/dashboard" });

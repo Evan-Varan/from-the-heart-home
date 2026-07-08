@@ -553,6 +553,35 @@ export const tutorSubjectsRelations = relations(tutor_subjects, ({ one }) => ({
 }));
 
 // ---------------------------------------------------------------------------
+// portal_invites
+// ---------------------------------------------------------------------------
+export const portal_invites = sqliteTable("portal_invites", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  email: text("email").notNull(),
+  // 'tutor' | 'admin'
+  role: text("role").notNull(),
+  token: text("token").notNull().unique(),
+  invited_by_user_id: text("invited_by_user_id")
+    .notNull()
+    .references(() => users.id),
+  created_at: integer("created_at", { mode: "timestamp" })
+    .notNull()
+    .$defaultFn(() => new Date()),
+  expires_at: integer("expires_at", { mode: "timestamp" }).notNull(),
+  accepted_at: integer("accepted_at", { mode: "timestamp" }),
+  accepted_user_id: text("accepted_user_id").references(() => users.id),
+});
+
+export const portalInvitesRelations = relations(portal_invites, ({ one }) => ({
+  invited_by: one(users, {
+    fields: [portal_invites.invited_by_user_id],
+    references: [users.id],
+  }),
+}));
+
+// ---------------------------------------------------------------------------
 // system_settings
 // ---------------------------------------------------------------------------
 export const system_settings = sqliteTable("system_settings", {

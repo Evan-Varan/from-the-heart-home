@@ -26,7 +26,7 @@ export interface UserData {
 }
 
 // Get or create the D1 user record for the current Clerk session.
-// Must be called from a server function context.
+// Must be called from a server function context (has access to auth()).
 async function syncUser(): Promise<UserData> {
   const { userId: clerkId, sessionClaims } = await auth();
   assertAuthenticated(clerkId);

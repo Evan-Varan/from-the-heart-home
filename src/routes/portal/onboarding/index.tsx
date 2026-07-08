@@ -12,8 +12,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export const Route = createFileRoute("/portal/onboarding/")({
   beforeLoad: async () => {
-    const { userId } = await getPortalAuthState();
+    const { userId, role } = await getPortalAuthState();
     if (!userId) throw redirect({ to: "/portal/login" });
+    if (role === "tutor" || role === "admin") throw redirect({ to: "/portal" });
     const account = await getFamilyAccount();
     if (account?.onboarding_status === "ready") throw redirect({ to: "/portal/dashboard" });
     if (account?.onboarding_status === "payment_required") {
