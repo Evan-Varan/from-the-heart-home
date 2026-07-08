@@ -531,6 +531,14 @@ export const subjectsRelations = relations(subjects, ({ many }) => ({
 
 export const tutorsRelations = relations(tutors, ({ many }) => ({
   tutor_subjects: many(tutor_subjects),
+  tutor_availability_blocks: many(tutor_availability_blocks),
+}));
+
+export const tutorAvailabilityBlocksRelations = relations(tutor_availability_blocks, ({ one }) => ({
+  tutor: one(tutors, {
+    fields: [tutor_availability_blocks.tutor_id],
+    references: [tutors.id],
+  }),
 }));
 
 export const tutorSubjectsRelations = relations(tutor_subjects, ({ one }) => ({
