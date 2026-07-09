@@ -81,6 +81,7 @@ function InviteAcceptPage() {
     setError(null);
     try {
       await acceptInvite({ data: { token } });
+      sessionStorage.removeItem("pendingInviteToken");
       setAccepted(true);
       // Full-page reload so the SSR auth check picks up the updated D1 role
       // without requiring a sign-out/sign-in cycle. The D1 fallback in
@@ -152,7 +153,12 @@ function InviteAcceptPage() {
           ) : (
             <div className="space-y-3">
               <Button className="w-full" asChild>
-                <a href={`/portal/register?invite=${token}`}>Create your account</a>
+                <a
+                  href={`/portal/register?invite=${token}`}
+                  onClick={() => sessionStorage.setItem("pendingInviteToken", token)}
+                >
+                  Create your account
+                </a>
               </Button>
               <p className="text-xs text-muted-foreground text-center">
                 Already have an account?{" "}

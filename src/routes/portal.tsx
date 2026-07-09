@@ -17,8 +17,8 @@ export const Route = createFileRoute("/portal")({
   component: PortalLayout,
 });
 
-// Public portal paths that don't require an active session
 const PUBLIC_PATHS = ["/portal/login", "/portal/register", "/portal/invite", "/portal/forgot-password"];
+const PENDING_INVITE_KEY = "pendingInviteToken";
 
 function PortalRoot() {
   const { isLoaded, isSignedIn } = useAuth();
@@ -26,10 +26,22 @@ function PortalRoot() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
-    if (!isLoaded || isSignedIn) return;
-    const isPublic = PUBLIC_PATHS.some((p) => pathname.startsWith(p));
-    if (!isPublic) {
-      navigate({ to: "/portal/login" });
+    if (!isLoaded) return;
+
+    if (!isSignedIn) {
+      const isPublic = PUBLIC_PATHS.some((p) => pathname.startsWith(p));
+      if (!isPublic) navigate({ to: "/portal/login" });
+      return;
+    }
+
+    // After sign-in, check whether the user came via an invite link.
+    // We store the token in sessionStorage before navigating to /register
+    // so that even if Clerk's post-signup redirect doesn't land on the
+    // invite page, we can still route them there to complete acceptance.
+    const pendingToken = sessionStorage.getItem(PENDING_INVITE_KEY);
+    if (pendingToken && !pathname.startsWith("/portal/invite")) {
+      sessionStorage.removeItem(PENDING_INVITE_KEY);
+      navigate({ to: "/portal/invite/$token", params: { token: pendingToken } });
     }
   }, [isLoaded, isSignedIn, pathname]);
 
