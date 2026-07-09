@@ -58,9 +58,9 @@ function InviteAcceptPage() {
             <div>
               <h2 className="text-xl font-semibold">You're all set!</h2>
               <p className="text-sm text-muted-foreground mt-1">
-                Your account has been set up as a{" "}
+                Your role has been configured as a{" "}
                 <strong>{ROLE_LABELS[invite.role] ?? invite.role}</strong>.
-                Signing you in now…
+                Taking you to create your account…
               </p>
             </div>
           </CardContent>
@@ -76,7 +76,7 @@ function InviteAcceptPage() {
       await acceptInvite({ data: { token } });
       setAccepted(true);
       setTimeout(() => {
-        signOut({ redirectUrl: "/portal/login" });
+        signOut({ redirectUrl: "/portal/register" });
       }, 1500);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
@@ -112,7 +112,7 @@ function InviteAcceptPage() {
               </Button>
               {error && <p className="text-sm text-destructive text-center">{error}</p>}
               <p className="text-xs text-muted-foreground text-center">
-                After accepting, you'll be signed out once so your role takes effect, then you can sign back in.
+                After accepting, you'll be taken to create your account. If you already have one, you can sign in from there.
               </p>
             </div>
           ) : (
