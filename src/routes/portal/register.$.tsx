@@ -18,7 +18,7 @@ function RegisterPage() {
         routing="path"
         path="/portal/register"
         signInUrl="/portal/login"
-        fallbackRedirectUrl={afterUrl}
+        forceRedirectUrl={afterUrl}
       />
     </div>
   );

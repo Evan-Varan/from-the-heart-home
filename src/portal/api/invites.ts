@@ -175,6 +175,20 @@ export const getInviteByToken = createServerFn({ method: "GET" }).handler(
   },
 );
 
+export const getPortalUserEmail = createServerFn({ method: "GET" }).handler(
+  async (): Promise<string | null> => {
+    const { userId: clerkId } = await auth();
+    if (!clerkId) return null;
+    const db = getDb();
+    const user = await db.query.users.findFirst({
+      where: eq(users.auth_provider_user_id, clerkId),
+    });
+    // Only return real emails (not the fallback placeholder created when claims lacked email)
+    if (!user || user.email.endsWith("@unknown.local")) return null;
+    return user.email;
+  },
+);
+
 export const acceptInvite = createServerFn({ method: "POST" }).handler(
   async (ctx: { data: { token: string } }): Promise<{ role: string }> => {
     const { userId: clerkId, sessionClaims } = await auth();
@@ -188,6 +202,19 @@ export const acceptInvite = createServerFn({ method: "POST" }).handler(
     if (!invite) throw new ValidationError("Invalid invite link.");
     if (invite.accepted_at) throw new ValidationError("This invite has already been used.");
     if (invite.expires_at < new Date()) throw new ValidationError("This invite link has expired.");
+
+    // Block wrong-account accepts: if the logged-in user already has a D1 record
+    // (i.e., an existing user like admin), verify their email matches the invite.
+    const existingUser = await db.query.users.findFirst({
+      where: eq(users.auth_provider_user_id, clerkId!),
+    });
+    if (existingUser && !existingUser.email.endsWith("@unknown.local")) {
+      if (existingUser.email.toLowerCase() !== invite.email.toLowerCase()) {
+        throw new ValidationError(
+          "This invite was sent to a different email address. Please sign out and use the invited account.",
+        );
+      }
+    }
 
     let user = await db.query.users.findFirst({
       where: eq(users.auth_provider_user_id, clerkId!),

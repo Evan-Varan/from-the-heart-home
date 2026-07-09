@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useClerk } from "@clerk/tanstack-react-start";
 import { getPortalAuthState } from "@/portal/auth/server";
-import { getInviteByToken, acceptInvite } from "@/portal/api/invites";
+import { getInviteByToken, acceptInvite, getPortalUserEmail } from "@/portal/api/invites";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,11 +24,13 @@ export const Route = createFileRoute("/portal/invite/$token")({
       getInviteByToken({ data: { token: params.token } }),
       getPortalAuthState(),
     ]);
-    return {
-      invite,
-      isLoggedIn: !!authState.userId,
-      currentUserEmail: authState.email,
-    };
+
+    // Only look up the logged-in user's email when someone is actually signed in.
+    // D1 returns null for brand-new signups (no record yet), which is the correct
+    // behavior — those users should be allowed to accept without an email check.
+    const currentUserEmail = authState.userId ? await getPortalUserEmail() : null;
+
+    return { invite, isLoggedIn: !!authState.userId, currentUserEmail };
   },
   component: InviteAcceptPage,
 });
@@ -88,9 +90,11 @@ function InviteAcceptPage() {
     }
   };
 
-  // User is logged in with a different account — block the accept
+  // If the logged-in user has a known email that doesn't match the invite, block them.
   const emailMismatch =
-    isLoggedIn && currentUserEmail && currentUserEmail.toLowerCase() !== invite.email.toLowerCase();
+    isLoggedIn &&
+    currentUserEmail !== null &&
+    currentUserEmail.toLowerCase() !== invite.email.toLowerCase();
 
   return (
     <InviteShell>
@@ -118,8 +122,8 @@ function InviteAcceptPage() {
               <div className="rounded-md bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-800">
                 <p className="font-medium">Wrong account</p>
                 <p className="mt-1">
-                  You're signed in as <strong>{currentUserEmail}</strong>, but this invite was sent
-                  to <strong>{invite.email}</strong>. Sign out and use the invited email to
+                  You're signed in as <strong>{currentUserEmail}</strong>, but this invite was
+                  sent to <strong>{invite.email}</strong>. Sign out and use the invited email to
                   continue.
                 </p>
               </div>
