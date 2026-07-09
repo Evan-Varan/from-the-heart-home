@@ -24,13 +24,17 @@ export const Route = createFileRoute("/portal/invite/$token")({
       getInviteByToken({ data: { token: params.token } }),
       getPortalAuthState(),
     ]);
-    return { invite, isLoggedIn: !!authState.userId };
+    return {
+      invite,
+      isLoggedIn: !!authState.userId,
+      currentUserEmail: authState.email,
+    };
   },
   component: InviteAcceptPage,
 });
 
 function InviteAcceptPage() {
-  const { invite, isLoggedIn } = Route.useLoaderData();
+  const { invite, isLoggedIn, currentUserEmail } = Route.useLoaderData();
   const { token } = Route.useParams();
   const { signOut } = useClerk();
   const [accepting, setAccepting] = useState(false);
@@ -60,7 +64,7 @@ function InviteAcceptPage() {
               <p className="text-sm text-muted-foreground mt-1">
                 Your role has been configured as a{" "}
                 <strong>{ROLE_LABELS[invite.role] ?? invite.role}</strong>.
-                Taking you to create your account…
+                Taking you to sign in…
               </p>
             </div>
           </CardContent>
@@ -76,13 +80,17 @@ function InviteAcceptPage() {
       await acceptInvite({ data: { token } });
       setAccepted(true);
       setTimeout(() => {
-        signOut({ redirectUrl: "/portal/register" });
+        signOut({ redirectUrl: "/portal/login" });
       }, 1500);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
       setAccepting(false);
     }
   };
+
+  // User is logged in with a different account — block the accept
+  const emailMismatch =
+    isLoggedIn && currentUserEmail && currentUserEmail.toLowerCase() !== invite.email.toLowerCase();
 
   return (
     <InviteShell>
@@ -105,14 +113,32 @@ function InviteAcceptPage() {
             Invite sent to: <span className="font-medium text-foreground">{invite.email}</span>
           </div>
 
-          {isLoggedIn ? (
+          {emailMismatch ? (
+            <div className="space-y-3">
+              <div className="rounded-md bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-800">
+                <p className="font-medium">Wrong account</p>
+                <p className="mt-1">
+                  You're signed in as <strong>{currentUserEmail}</strong>, but this invite was sent
+                  to <strong>{invite.email}</strong>. Sign out and use the invited email to
+                  continue.
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => signOut({ redirectUrl: `/portal/invite/${token}` })}
+              >
+                Sign Out
+              </Button>
+            </div>
+          ) : isLoggedIn ? (
             <div className="space-y-3">
               <Button className="w-full" onClick={handleAccept} disabled={accepting}>
                 {accepting ? "Accepting…" : "Accept Invitation"}
               </Button>
               {error && <p className="text-sm text-destructive text-center">{error}</p>}
               <p className="text-xs text-muted-foreground text-center">
-                After accepting, you'll be taken to create your account. If you already have one, you can sign in from there.
+                After accepting, sign back in to access your portal.
               </p>
             </div>
           ) : (
