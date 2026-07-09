@@ -25,9 +25,10 @@ export const Route = createFileRoute("/portal/invite/$token")({
       getPortalAuthState(),
     ]);
 
-    // Only look up the logged-in user's email when someone is actually signed in.
-    // D1 returns null for brand-new signups (no record yet), which is the correct
-    // behavior — those users should be allowed to accept without an email check.
+    // Fetch the logged-in user's real email from Clerk so we can detect
+    // wrong-account situations before they reach the accept button.
+    // Returns null for users with no Clerk account context (shouldn't happen)
+    // and for local dev environments where the Clerk API isn't available.
     const currentUserEmail = authState.userId ? await getPortalUserEmail() : null;
 
     return { invite, isLoggedIn: !!authState.userId, currentUserEmail };
@@ -66,7 +67,7 @@ function InviteAcceptPage() {
               <p className="text-sm text-muted-foreground mt-1">
                 Your role has been configured as a{" "}
                 <strong>{ROLE_LABELS[invite.role] ?? invite.role}</strong>.
-                Taking you to sign in…
+                Taking you to your portal…
               </p>
             </div>
           </CardContent>
@@ -81,16 +82,19 @@ function InviteAcceptPage() {
     try {
       await acceptInvite({ data: { token } });
       setAccepted(true);
+      // Full-page reload so the SSR auth check picks up the updated D1 role
+      // without requiring a sign-out/sign-in cycle. The D1 fallback in
+      // getPortalAuthState handles the case where the JWT hasn't refreshed yet.
       setTimeout(() => {
-        signOut({ redirectUrl: "/portal/login" });
-      }, 1500);
+        window.location.href = "/portal";
+      }, 1200);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
       setAccepting(false);
     }
   };
 
-  // If the logged-in user has a known email that doesn't match the invite, block them.
+  // If we know the signed-in user's email and it doesn't match the invite, block.
   const emailMismatch =
     isLoggedIn &&
     currentUserEmail !== null &&
@@ -142,7 +146,7 @@ function InviteAcceptPage() {
               </Button>
               {error && <p className="text-sm text-destructive text-center">{error}</p>}
               <p className="text-xs text-muted-foreground text-center">
-                After accepting, sign back in to access your portal.
+                You're signed in as <strong>{currentUserEmail ?? invite.email}</strong>.
               </p>
             </div>
           ) : (

@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { eq, and, isNull, gt } from "drizzle-orm";
-import { auth } from "@clerk/tanstack-react-start/server";
+import { auth, clerkClient } from "@clerk/tanstack-react-start/server";
 import { createClerkClient } from "@clerk/backend";
 import { Resend } from "resend";
 import { getDb } from "@/portal/lib/db.server";
@@ -56,6 +56,27 @@ async function ensureUser(
     status: "active",
   });
   return db.query.users.findFirst({ where: eq(users.auth_provider_user_id, clerkId) });
+}
+
+// Returns the primary email for a Clerk user ID, trying the Clerk API first
+// and falling back to the D1 record. Returns null if neither has a real email.
+async function getClerkEmail(clerkId: string): Promise<string | null> {
+  try {
+    const user = await clerkClient().users.getUser(clerkId);
+    return (
+      user.emailAddresses.find((e) => e.id === user.primaryEmailAddressId)?.emailAddress ??
+      user.emailAddresses[0]?.emailAddress ??
+      null
+    );
+  } catch {
+    // clerkClient() may not be configured in some local dev setups
+    const db = getDb();
+    const row = await db.query.users.findFirst({
+      where: eq(users.auth_provider_user_id, clerkId),
+    });
+    const email = row?.email;
+    return email && !email.endsWith("@unknown.local") ? email : null;
+  }
 }
 
 export const createInvite = createServerFn({ method: "POST" }).handler(
@@ -175,17 +196,13 @@ export const getInviteByToken = createServerFn({ method: "GET" }).handler(
   },
 );
 
+// Returns the primary email for the currently signed-in user, sourced from
+// the Clerk API (most reliable) with a D1 fallback for local dev environments.
 export const getPortalUserEmail = createServerFn({ method: "GET" }).handler(
   async (): Promise<string | null> => {
     const { userId: clerkId } = await auth();
     if (!clerkId) return null;
-    const db = getDb();
-    const user = await db.query.users.findFirst({
-      where: eq(users.auth_provider_user_id, clerkId),
-    });
-    // Only return real emails (not the fallback placeholder created when claims lacked email)
-    if (!user || user.email.endsWith("@unknown.local")) return null;
-    return user.email;
+    return getClerkEmail(clerkId);
   },
 );
 
@@ -203,17 +220,14 @@ export const acceptInvite = createServerFn({ method: "POST" }).handler(
     if (invite.accepted_at) throw new ValidationError("This invite has already been used.");
     if (invite.expires_at < new Date()) throw new ValidationError("This invite link has expired.");
 
-    // Block wrong-account accepts: if the logged-in user already has a D1 record
-    // (i.e., an existing user like admin), verify their email matches the invite.
-    const existingUser = await db.query.users.findFirst({
-      where: eq(users.auth_provider_user_id, clerkId!),
-    });
-    if (existingUser && !existingUser.email.endsWith("@unknown.local")) {
-      if (existingUser.email.toLowerCase() !== invite.email.toLowerCase()) {
-        throw new ValidationError(
-          "This invite was sent to a different email address. Please sign out and use the invited account.",
-        );
-      }
+    // Block wrong-account accepts by checking the signed-in user's real email
+    // against the invite email. Uses Clerk API (reliable for all users regardless
+    // of whether they have a D1 record yet) with a D1 fallback for local dev.
+    const userEmail = await getClerkEmail(clerkId!);
+    if (userEmail && userEmail.toLowerCase() !== invite.email.toLowerCase()) {
+      throw new ValidationError(
+        "This invite was sent to a different email address. Please sign out and use the invited account.",
+      );
     }
 
     let user = await db.query.users.findFirst({
@@ -232,8 +246,8 @@ export const acceptInvite = createServerFn({ method: "POST" }).handler(
 
     const config = getServerConfig();
     if (config.clerk.secretKey) {
-      const clerkClient = createClerkClient({ secretKey: config.clerk.secretKey });
-      await clerkClient.users.updateUserMetadata(clerkId!, {
+      const clerkBE = createClerkClient({ secretKey: config.clerk.secretKey });
+      await clerkBE.users.updateUserMetadata(clerkId!, {
         publicMetadata: { role: invite.role },
       });
     }
